@@ -1,0 +1,9 @@
+{
+  "name": "triamici-monorepo",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "frontend"
+  ]
+}
+
