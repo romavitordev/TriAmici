@@ -2,9 +2,6 @@ import { Router } from 'express'
 import contatoRoutes from './contato.js'
 import depoimentosRoutes from './depoimentos.js'
 import galeriaRoutes from './galeria.js'
-import contatoRoutes from './contato.js'
-import depoimentosRoutes from './depoimentos.js'
-import galeriaRoutes from './galeria.js'
 
 const router = Router()
 

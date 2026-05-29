@@ -2,10 +2,9 @@ import nodemailer from 'nodemailer'
 import { config } from '../config/index.js'
 import type { LeadInput } from '../types/index.js'
 
-export async function sendNotification(lead: LeadInput) {
+export async function sendNotification(lead: LeadInput): Promise<{ sent: boolean; reason?: string }> {
   if (!config.smtp.host || !config.smtp.user || !config.smtp.pass) {
-    console.warn('SMTP nao configurado; e-mail de lead ignorado')
-    return
+    return { sent: false, reason: 'SMTP não configurado nas variáveis de ambiente' }
   }
 
   const transporter = nodemailer.createTransport({
@@ -29,4 +28,6 @@ export async function sendNotification(lead: LeadInput) {
       <p>${lead.mensagem ?? '-'}</p>
     `
   })
+
+  return { sent: true }
 }

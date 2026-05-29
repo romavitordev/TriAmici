@@ -11,7 +11,6 @@ export const config = {
 
   corsOrigin: process.env.CORS_ORIGIN ?? 'http://localhost:3000',
 
-  jwtSecret: process.env.JWT_SECRET ?? 'dev-secret-change-me',
   db: {
     user: process.env.DB_USER ?? 'sa',
     password: process.env.DB_PASSWORD ?? '',
@@ -26,5 +25,4 @@ export const config = {
     pass: process.env.SMTP_PASS ?? '',
     destino: process.env.EMAIL_DESTINO ?? 'escola@triamici.com.br'
   },
-  // admin config removed when admin UI/API is not used
 }

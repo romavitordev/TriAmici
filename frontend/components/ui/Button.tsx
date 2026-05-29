@@ -9,9 +9,10 @@ type Props = {
   className?: string
   type?: 'button' | 'submit'
   disabled?: boolean
+  onClick?: () => void
 }
 
-export function Button({ href, children, variant = 'primary', className, type = 'button', disabled }: Props) {
+export function Button({ href, children, variant = 'primary', className, type = 'button', disabled, onClick }: Props) {
   const classes = clsx('btn', variant === 'primary' ? 'btn-primary' : 'btn-outline', className)
   const content = (
     <>
@@ -22,14 +23,14 @@ export function Button({ href, children, variant = 'primary', className, type = 
 
   if (href) {
     return (
-      <Link href={href} className={classes}>
+      <Link href={href} className={classes} onClick={onClick}>
         {content}
       </Link>
     )
   }
 
   return (
-    <button type={type} disabled={disabled} className={classes}>
+    <button type={type} disabled={disabled} onClick={onClick} className={classes}>
       {content}
     </button>
   )

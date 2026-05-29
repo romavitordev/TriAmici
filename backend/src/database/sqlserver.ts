@@ -11,8 +11,8 @@ const sqlConfig: sql.config = {
   port: config.db.port ? Number(config.db.port) : undefined,
 
   options: {
-    encrypt: false,
-    trustServerCertificate: true,
+    encrypt: config.env === 'production',
+    trustServerCertificate: config.env !== 'production',
     enableArithAbort: true
   },
 

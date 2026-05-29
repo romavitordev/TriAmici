@@ -40,7 +40,7 @@ export function Galeria() {
         </div>
         <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
           {fotos.map((foto, index) => (
-            <figure key={foto.id} className="reveal-photo group mb-5 break-inside-avoid bg-escuro" style={{ transitionDelay: `${index * 80}ms` }}>
+            <figure key={foto.id} className={`reveal-photo reveal-photo--${index + 1} group mb-5 break-inside-avoid bg-escuro`}>
               <div className="relative aspect-[4/5] overflow-hidden">
                 <Image src={foto.url} alt={foto.legenda ?? 'Foto de aluno Tri Amici'} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover transition duration-700 group-hover:scale-105" />
                 <figcaption className="absolute inset-x-0 bottom-0 z-10 translate-y-4 bg-gradient-to-t from-black to-transparent p-5 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">

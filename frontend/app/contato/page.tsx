@@ -57,7 +57,7 @@ export default function ContatoPage() {
         </div>
 
         <aside className="border border-borda bg-escuro p-8">
-          <h2 className="font-serif text-3xl text-dourado">Tri Amici House</h2>
+          <h2 className="font-serif text-3xl text-dourado">Tri Amici Academy</h2>
           <div className="mt-8 grid gap-5 text-cinza">
             <p className="flex gap-3"><Phone className="text-dourado" /> (15) 3321-3365</p>
             <p className="flex gap-3"><MessageCircle className="text-dourado" /> (15) 9 8112-7508</p>

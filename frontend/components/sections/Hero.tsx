@@ -28,12 +28,13 @@ export function Hero() {
 
     if (!hero || !bg || !title || !sub || !desc) return
 
+    const isMobile = window.innerWidth < 768
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: '+=1200%', // 🔥 MUITO MAIS RESPIRO (hero longa mesmo)
-        scrub: 1.2, // 🔥 desaceleração leve global
+        end: isMobile ? '+=200%' : '+=1200%',
+        scrub: isMobile ? 0.8 : 1.2,
         pin: true,
         anticipatePin: 1
       }

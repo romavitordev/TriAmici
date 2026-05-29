@@ -11,7 +11,14 @@ router.post('/', contactRateLimit, validate(leadSchema), async (req, res) => {
   try {
     const { empresa, ...lead } = req.body
     const id = await createLead(lead)
-    sendNotification(lead).catch((error) => console.error('mail_error', error))
+
+    sendNotification(lead)
+      .then(({ sent, reason }) => {
+        if (!sent) console.warn(`[mail] notificação não enviada — ${reason}`)
+        else console.log(`[mail] notificação enviada para ${lead.email}`)
+      })
+      .catch((error) => console.error('[mail] erro ao enviar notificação:', error))
+
     res.status(201).json({ id })
   } catch (error) {
     console.error('create_lead_error', error)
