@@ -98,10 +98,11 @@ a {
   content: "";
   position: absolute;
   top: 0;
-  left: -100%;
+  left: 0;
   height: 100%;
   width: 60%;
-  transform: skewX(-20deg);
+  will-change: transform;
+  transform: skewX(-20deg) translateX(-200%);
   background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.28), transparent);
 }
 
@@ -111,8 +112,8 @@ a {
 }
 
 .btn-primary:hover::before {
-  left: 150%;
-  transition: left 0.55s ease;
+  transform: skewX(-20deg) translateX(280%);
+  transition: transform 0.55s ease;
 }
 
 .btn-outline {

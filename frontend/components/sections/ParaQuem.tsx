@@ -69,7 +69,6 @@ export function ParaQuem() {
     gsap.to(text, {
       y: -80,
       opacity: 0,
-      filter: 'blur(8px)',
       scrollTrigger: {
         trigger: section,
         start: 'top top',
@@ -78,24 +77,36 @@ export function ParaQuem() {
       },
     })
 
+    // 2 ScrollTriggers em vez de 11 — um para todos os cards, um para o último
     const cards = gsap.utils.toArray<HTMLElement>('.skill-card')
-    cards.forEach((card, i) => {
-      const isLast = i === cards.length - 1
-      gsap.to(card, {
-        scale: isLast ? 1.15 : 1.02,
-        opacity: isLast ? 1 : 0.75,
-        y: isLast ? -10 : 0,
-        filter: isLast ? 'blur(0px)' : 'blur(0.4px)',
-        boxShadow: isLast ? '0 70px 200px rgba(0,0,0,0.85)' : '0 20px 60px rgba(0,0,0,0.4)',
+    const lastCard = cards[cards.length - 1]
+    const restCards = cards.slice(0, -1)
+
+    const stConfig = {
+      trigger: section,
+      start: 'top top',
+      end: `+=${maxScroll}`,
+      scrub: 1.6,
+      invalidateOnRefresh: true,
+    }
+
+    if (restCards.length) {
+      gsap.to(restCards, {
+        scale: 1.02,
+        opacity: 0.75,
+        boxShadow: '0 20px 60px rgba(0,0,0,0.4)',
         ease: 'none',
-        scrollTrigger: {
-          trigger: section,
-          start: 'top top',
-          end: `+=${maxScroll}`,
-          scrub: 1.6,
-          invalidateOnRefresh: true,
-        },
+        scrollTrigger: stConfig,
       })
+    }
+
+    gsap.to(lastCard, {
+      scale: 1.15,
+      opacity: 1,
+      y: -10,
+      boxShadow: '0 70px 200px rgba(0,0,0,0.85)',
+      ease: 'none',
+      scrollTrigger: stConfig,
     })
 
     ScrollTrigger.refresh()

@@ -70,38 +70,15 @@ export function Hero() {
     // ─────────────────────────────
     tl.fromTo(
       sub,
-      {
-        opacity: 0,
-        y: 30,
-        scale: 0.95,
-        filter: 'blur(10px)'
-      },
-      {
-        opacity: 1,
-        y: 8,
-        scale: 1,
-        filter: 'blur(0px)',
-        ease: 'none'
-      },
+      { opacity: 0, y: 30, scale: 0.95 },
+      { opacity: 1, y: 8,  scale: 1,   ease: 'none' },
       0.5
     )
 
-    // ─────────────────────────────
-    // 🧾 DESCRIÇÃO ENTRA TARDE (RESPIRO GRANDE)
-    // ─────────────────────────────
     tl.fromTo(
       desc,
-      {
-        opacity: 0,
-        y: 50,
-        filter: 'blur(6px)'
-      },
-      {
-        opacity: 1,
-        y: 0,
-        filter: 'blur(0px)',
-        ease: 'none'
-      },
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0,  ease: 'none' },
       0.78
     )
 
@@ -145,13 +122,13 @@ export function Hero() {
         </p>
 
         <h1 className="font-serif text-5xl leading-[1.05] md:text-8xl">
-          <span ref={titleRef} className="block">
+          <span ref={titleRef} className="block will-change-[transform,opacity]">
             Fotografia que muda
           </span>
 
           <span
             ref={subRef}
-            className="block mt-4 font-serif italic text-dourado opacity-0"
+            className="block mt-4 font-serif italic text-dourado opacity-0 will-change-[transform,opacity]"
           >
             quem você é.
           </span>
@@ -159,7 +136,7 @@ export function Hero() {
 
         <p
           ref={descRef}
-          className="mx-auto mt-10 max-w-3xl text-lg leading-8 text-branco/80"
+          className="mx-auto mt-10 max-w-3xl text-lg leading-8 text-branco/80 will-change-[transform,opacity]"
         >
           25 anos formando fotógrafos profissionais com o método mais completo da região.
         </p>

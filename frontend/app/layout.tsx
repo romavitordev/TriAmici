@@ -10,7 +10,6 @@ import { CustomCursor } from '@/components/layout/CustomCursor'
 import { LenisProvider } from '@/components/layout/LenisProvider'
 import { PageTransition } from '@/components/layout/PageTransition'
 import { AudioPlayer } from '@/components/ui/AudioPlayer'
-import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
 
 
 
@@ -45,10 +44,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <main>{children}</main>
         </PageTransition>
         <Footer />
-        <MobileBottomNav />
-
-
         <AudioPlayer />
+        {/* MobileBottomNav é renderizado dentro de <Header /> */}
       </body>
     </html>
   )
