@@ -1,4 +1,5 @@
 import { CtaFinal } from '@/components/sections/CtaFinal'
+import { Curso } from '@/components/sections/Curso'
 import { Depoimentos } from '@/components/sections/Depoimentos'
 import { Galeria } from '@/components/sections/Galeria'
 import { Hero } from '@/components/sections/Hero'
@@ -9,6 +10,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      <Curso />
       <Stats />
       <ParaQuem />
       <Galeria />
