@@ -80,9 +80,9 @@ export function Depoimentos() {
 
       <div className="relative mt-12">
         {/* Fade lateral esquerdo */}
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-[#151515] to-transparent sm:w-40 md:w-64" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-4 bg-gradient-to-r from-[#151515] to-transparent sm:w-40 md:w-64" />
         {/* Fade lateral direito */}
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-[#151515] to-transparent sm:w-40 md:w-64" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-4 bg-gradient-to-l from-[#151515] to-transparent sm:w-40 md:w-64" />
 
       <Swiper
         className=""
@@ -96,8 +96,8 @@ export function Depoimentos() {
         coverflowEffect={{ rotate: 0, stretch: 0, depth: 140, modifier: 1.2, slideShadows: false }}
       >
         {items.map((item) => (
-          <SwiperSlide key={item.id} className="max-w-xl">
-            <article className="border border-dourado/25 bg-preto p-8">
+          <SwiperSlide key={item.id} className="w-[76vw] max-w-sm sm:w-auto sm:max-w-xl">
+            <article className="border border-dourado/25 bg-preto p-5 sm:p-8">
               <div className="flex items-center gap-4">
                 {item.foto && (
                   <Image
