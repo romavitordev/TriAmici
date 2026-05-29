@@ -1,12 +1,18 @@
+import './globals.css'
+
 import type { Metadata } from 'next'
+
 import { Cormorant_Garamond, DM_Sans, Playfair_Display } from 'next/font/google'
+
 import { Footer } from '@/components/layout/Footer'
 import { Header } from '@/components/layout/Header'
 import { CustomCursor } from '@/components/layout/CustomCursor'
 import { LenisProvider } from '@/components/layout/LenisProvider'
 import { PageTransition } from '@/components/layout/PageTransition'
 import { AudioPlayer } from '@/components/ui/AudioPlayer'
-import './globals.css'
+import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
+
+
 
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair', display: 'swap' })
 const dmSans = DM_Sans({ subsets: ['latin'], variable: '--font-dm-sans', display: 'swap' })
@@ -29,14 +35,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${playfair.variable} ${dmSans.variable} ${cormorant.variable}`}>
-      <body className="font-sans">
+      <body className="font-sans cursor-none">
+
         <LenisProvider />
+
         <CustomCursor />
         <Header />
         <PageTransition>
           <main>{children}</main>
         </PageTransition>
         <Footer />
+        <MobileBottomNav />
+
+
         <AudioPlayer />
       </body>
     </html>

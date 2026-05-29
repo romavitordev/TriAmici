@@ -11,46 +11,170 @@ gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
   const heroRef = useRef<HTMLElement>(null)
+
   const bgRef = useRef<HTMLDivElement>(null)
-  const text1Ref = useRef<HTMLHeadingElement>(null)
-  const text2Ref = useRef<HTMLSpanElement>(null)
+  const titleRef = useRef<HTMLSpanElement>(null)
+  const subRef = useRef<HTMLSpanElement>(null)
+  const descRef = useRef<HTMLParagraphElement>(null)
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+
+    const hero = heroRef.current
+    const bg = bgRef.current
+    const title = titleRef.current
+    const sub = subRef.current
+    const desc = descRef.current
+
+    if (!hero || !bg || !title || !sub || !desc) return
+
     const tl = gsap.timeline({
       scrollTrigger: {
-        trigger: heroRef.current,
+        trigger: hero,
         start: 'top top',
-        end: '+=200%',
-        scrub: 1,
+        end: '+=1200%', // 🔥 MUITO MAIS RESPIRO (hero longa mesmo)
+        scrub: 1.2, // 🔥 desaceleração leve global
         pin: true,
         anticipatePin: 1
       }
     })
-    tl.to(bgRef.current, { scale: 1.08, ease: 'none' })
-      .to(text1Ref.current, { opacity: 0, y: -40 }, '<50%')
-      .fromTo(text2Ref.current, { opacity: 0, filter: 'blur(8px)', y: 30 }, { opacity: 1, filter: 'blur(0px)', y: 0 }, '-=0.3')
+
+    // 🎥 ZOOM SUAVE DE FUNDO
+    tl.to(bg, {
+      scale: 1.12,
+      ease: 'none'
+    }, 0)
+
+    // ─────────────────────────────
+    // 🧠 TÍTULO ESTÁVEL (não perde foco rápido)
+    // ─────────────────────────────
+    tl.fromTo(
+      title,
+      {
+        opacity: 1,
+        scale: 1.06,
+        y: 0
+      },
+      {
+        opacity: 0.75,
+        scale: 1,
+        y: -5,
+        ease: 'none'
+      },
+      0.2
+    )
+
+    // ─────────────────────────────
+    // 🎯 SUBTÍTULO ENTRA DEVAGAR
+    // ─────────────────────────────
+    tl.fromTo(
+      sub,
+      {
+        opacity: 0,
+        y: 30,
+        scale: 0.95,
+        filter: 'blur(10px)'
+      },
+      {
+        opacity: 1,
+        y: 8,
+        scale: 1,
+        filter: 'blur(0px)',
+        ease: 'none'
+      },
+      0.5
+    )
+
+    // ─────────────────────────────
+    // 🧾 DESCRIÇÃO ENTRA TARDE (RESPIRO GRANDE)
+    // ─────────────────────────────
+    tl.fromTo(
+      desc,
+      {
+        opacity: 0,
+        y: 50,
+        filter: 'blur(6px)'
+      },
+      {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        ease: 'none'
+      },
+      0.78
+    )
+
+    // ─────────────────────────────
+    // 🌫️ FINAL — “SOFT EXIT” (isso resolve o seu problema do scroll duro)
+    // ─────────────────────────────
+    tl.to(
+      hero,
+      {
+        opacity: 0.95,
+        ease: 'power2.out'
+      },
+      0.92
+    )
+
+    ScrollTrigger.refresh()
   }, [])
 
   return (
-    <section ref={heroRef} className="relative grid min-h-screen place-items-center overflow-hidden bg-preto px-4 py-28 text-center">
+    <section
+      ref={heroRef}
+      className="relative min-h-screen overflow-hidden bg-preto px-4 py-28 flex items-center justify-center"
+    >
+      {/* 🎥 BACKGROUND */}
       <div ref={bgRef} className="absolute inset-0 will-change-transform">
-        <Image src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1800&q=85" alt="Camera fotografica em detalhe" fill priority className="object-cover opacity-45" />
+        <Image
+          src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1800&q=85"
+          alt="Camera fotografica em detalhe"
+          fill
+          priority
+          className="object-cover opacity-45"
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-preto/30 via-preto/55 to-preto" />
       </div>
-      <div className="relative z-10 max-w-5xl">
-        <p className="section-kicker mb-6">Sorocaba · SP · Desde 2000</p>
-        <h1 ref={text1Ref} className="font-serif text-5xl leading-[0.95] md:text-8xl">
-          Fotografia que muda
-          <span ref={text2Ref} className="block font-serif italic text-dourado">quem voce e.</span>
+
+      {/* 🧠 CONTEÚDO */}
+      <div className="relative z-10 max-w-5xl flex flex-col items-center text-center">
+
+        <p className="section-kicker mb-8">
+          Sorocaba · SP · Desde 2000
+        </p>
+
+        <h1 className="font-serif text-5xl leading-[1.05] md:text-8xl">
+          <span ref={titleRef} className="block">
+            Fotografia que muda
+          </span>
+
+          <span
+            ref={subRef}
+            className="block mt-4 font-serif italic text-dourado opacity-0"
+          >
+            quem você é.
+          </span>
         </h1>
-        <p className="mx-auto mt-7 max-w-2xl text-lg leading-8 text-branco/80">25 anos formando fotografos profissionais com o metodo mais completo da regiao.</p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+
+        <p
+          ref={descRef}
+          className="mx-auto mt-10 max-w-3xl text-lg leading-8 text-branco/80"
+        >
+          25 anos formando fotógrafos profissionais com o método mais completo da região.
+        </p>
+
+        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href="/contato">Quero a aula gratuita</Button>
-          <Button href="/sobre" variant="outline">Conheca a escola</Button>
+          <Button href="/sobre" variant="outline">
+            Conheça a escola
+          </Button>
         </div>
       </div>
-      <div className="absolute bottom-7 left-1/2 z-10 -translate-x-1/2 animate-bounce text-xs tracking-[0.3em] text-branco/55">SCROLL</div>
+
+      {/* SCROLL INDICATOR */}
+      <div className="absolute bottom-7 left-1/2 -translate-x-1/2 animate-bounce text-xs tracking-[0.3em] text-branco/55">
+        SCROLL
+      </div>
     </section>
   )
 }

@@ -47,8 +47,9 @@ a {
 
 button,
 a {
-  cursor: pointer;
+  cursor: none;
 }
+
 
 ::selection {
   background: rgba(201, 168, 76, 0.45);

@@ -2,9 +2,11 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { X } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/Button'
+import { MobileBottomNav } from '@/components/layout/MobileBottomNav'
+
 
 const links = [
   { href: '/', label: 'Home' },
@@ -45,9 +47,12 @@ export function Header() {
           <Button href="/contato" className="min-h-10 px-4 py-2">Aula gratis</Button>
         </div>
 
-        <button className="grid h-10 w-10 place-items-center border border-borda text-dourado md:hidden" onClick={() => setOpen(true)} aria-label="Abrir menu">
-          <Menu />
-        </button>
+        <button
+          className="hidden h-10 w-10 place-items-center border border-borda text-dourado md:hidden"
+          onClick={() => setOpen(true)}
+          aria-label="Abrir menu"
+        />
+
       </div>
 
       {open && (

@@ -26,8 +26,5 @@ export const config = {
     pass: process.env.SMTP_PASS ?? '',
     destino: process.env.EMAIL_DESTINO ?? 'escola@triamici.com.br'
   },
-  admin: {
-    email: process.env.ADMIN_EMAIL ?? 'admin@triamici.com.br',
-    senhaInicial: process.env.ADMIN_SENHA_INICIAL ?? 'MudeSuaSenha@2026'
-  }
+  // admin config removed when admin UI/API is not used
 }

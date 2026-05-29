@@ -4,10 +4,23 @@ import { config } from '../config/index.js'
 const sqlConfig: sql.config = {
   user: config.db.user,
   password: config.db.password,
-  server: config.db.server,
+  server: config.db.server, // sempre "localhost"
   database: config.db.name,
-  port: config.db.port,
-  options: { encrypt: false, trustServerCertificate: true }
+
+  // 🔥 IMPORTANTE: só usa porta se existir
+  port: config.db.port ? Number(config.db.port) : undefined,
+
+  options: {
+    encrypt: false,
+    trustServerCertificate: true,
+    enableArithAbort: true
+  },
+
+  pool: {
+    max: 10,
+    min: 0,
+    idleTimeoutMillis: 30000
+  }
 }
 
 let pool: sql.ConnectionPool | null = null
@@ -16,8 +29,10 @@ let currentDatabase: string | null = null
 export async function connectDB(database = config.db.name) {
   if (pool?.connected && currentDatabase === database) return pool
   if (pool?.connected) await pool.close()
+
   pool = await sql.connect({ ...sqlConfig, database })
   currentDatabase = database
+
   console.log('SQL Server conectado')
   return pool
 }

@@ -30,8 +30,7 @@ Monorepo full-stack para o novo site da Tri Amici Photography Academy, em Soroca
 - `SMTP_USER=...`
 - `SMTP_PASS=...`
 - `EMAIL_DESTINO=...`
-- `ADMIN_EMAIL=...`
-- `ADMIN_SENHA_INICIAL=...`
+<!-- Admin credentials removed: this project does not include an admin UI by default -->
 
 > O backend carrega `.env` via `dotenv/config`.
 
@@ -66,9 +65,7 @@ O frontend fica em: **http://localhost:3000**
 ## Rotas principais
 
 - Site: `/`, `/sobre`, `/curso`, `/contato`
-- Admin: `/admin/login`, `/admin/dashboard`
 - API pública: `GET /api/health`, `GET /api/depoimentos`, `GET /api/galeria`, `POST /api/contato`
-- API admin: `POST /api/auth/login`, `/api/admin/leads`, `/api/admin/depoimentos`, `/api/admin/galeria`
 
 > Endpoints da API ficam em `http://localhost:3001/api`.
 
