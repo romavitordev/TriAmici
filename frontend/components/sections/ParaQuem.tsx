@@ -1,6 +1,7 @@
 'use client'
 
 import { useRef } from 'react'
+import { motion } from 'framer-motion'
 import {
   Aperture,
   Camera,
@@ -120,7 +121,13 @@ export function ParaQuem() {
     >
       {/* ── MOBILE LAYOUT ── visível só em < md */}
       <div className="md:hidden">
-        <div className="container-page">
+        <motion.div
+          className="container-page"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
+        >
           <p className="section-kicker">Para quem é este curso</p>
           <h2 className="mt-4 font-serif text-3xl leading-tight text-white">
             Uma experiência de vida inesquecível.
@@ -129,22 +136,42 @@ export function ParaQuem() {
             Este não é só um curso de fotografia.
             É uma transformação completa na forma de ver e criar imagens.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="container-page mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3">
+        <motion.div
+          className="container-page mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3"
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: '-60px' }}
+          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.07 } } }}
+        >
           {skills.map(({ title, desc, Icon }) => (
-            <div
+            <motion.div
               key={title}
-              className="flex flex-col gap-3 rounded-2xl border border-dourado/15 bg-[#141414] p-4"
+              variants={{
+                hidden: { opacity: 0, y: 26, scale: 0.95 },
+                show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } },
+              }}
+              className="group relative flex flex-col gap-3 overflow-hidden rounded-2xl border border-dourado/15 bg-gradient-to-b from-[#181818] to-[#0f0f0f] p-4 shadow-[0_6px_24px_rgba(0,0,0,0.35)] transition-transform duration-200 active:scale-[0.97]"
             >
-              <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/5">
-                <Icon className="h-4 w-4 text-dourado" />
+              {/* hairline dourado no topo */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-dourado/45 to-transparent"
+              />
+              {/* brilho sutil atrás do ícone */}
+              <span
+                aria-hidden
+                className="pointer-events-none absolute -left-6 -top-6 h-20 w-20 rounded-full bg-dourado/10 blur-2xl"
+              />
+              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-dourado/25 bg-dourado/10 text-dourado">
+                <Icon className="h-4 w-4" />
               </div>
-              <p className="text-sm font-medium leading-snug text-white">{title}</p>
-              <p className="text-xs leading-5 text-cinza/80">{desc}</p>
-            </div>
+              <p className="relative text-sm font-semibold leading-snug text-white">{title}</p>
+              <p className="relative text-xs leading-5 text-cinza/75">{desc}</p>
+            </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {/* ── DESKTOP LAYOUT ── visível só em md+ */}
