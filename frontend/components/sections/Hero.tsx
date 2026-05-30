@@ -33,7 +33,7 @@ export function Hero() {
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: isMobile ? '+=200%' : '+=1200%',
+        end: isMobile ? '+=200%' : '+=400%',
         scrub: isMobile ? 0.8 : 1.2,
         pin: true,
         anticipatePin: 1
