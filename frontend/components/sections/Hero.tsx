@@ -185,11 +185,7 @@ export function Hero() {
           <Button href="/sobre" variant="outline">Conheça a escola</Button>
         </div>
       </div>
-
-      {/* SCROLL INDICATOR */}
-      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 animate-bounce pl-[0.3em] text-xs tracking-[0.3em] text-branco/55 md:bottom-7">
-        SCROLL
-      </div>
+      
     </section>
   )
 }
