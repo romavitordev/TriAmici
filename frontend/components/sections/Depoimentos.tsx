@@ -97,7 +97,7 @@ export function Depoimentos() {
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} className="w-[76vw] max-w-sm sm:w-auto sm:max-w-xl">
-            <article className="border border-dourado/25 bg-preto p-5 sm:p-8">
+            <article className="lift-card border border-dourado/25 bg-preto p-5 sm:p-8">
               <div className="flex items-center gap-4">
                 {item.foto && (
                   <Image

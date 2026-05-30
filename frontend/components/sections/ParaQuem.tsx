@@ -176,7 +176,7 @@ export function ParaQuem() {
                 className="skill-card relative w-80 cursor-none select-none p-6 transition-all duration-200 ease-out hover:scale-[1.06] hover:-translate-y-2 hover:brightness-110 active:scale-[0.94] group"
               >
                 <div className="mb-5 flex items-center gap-3">
-                  <div className="rounded-xl bg-white/5 p-2 transition group-hover:bg-white/10">
+                  <div className="icon-spring rounded-xl bg-white/5 p-2 group-hover:bg-white/10">
                     <Icon className="h-5 w-5 text-dourado" />
                   </div>
                 </div>

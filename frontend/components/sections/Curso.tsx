@@ -100,8 +100,8 @@ export function Curso() {
 
             {/* Feature rows */}
             <div className="overflow-hidden rounded-2xl border border-white/[0.07]">
-              <div className="flex items-start gap-5 px-6 py-5 transition-colors duration-200 hover:bg-white/[0.025]">
-                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-dourado/10">
+              <div className="group flex items-start gap-5 px-6 py-5 transition-colors duration-200 hover:bg-white/[0.025]">
+                <div className="icon-spring mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-dourado/10">
                   <BookOpen className="h-4 w-4 text-dourado" />
                 </div>
                 <div>
@@ -112,8 +112,8 @@ export function Curso() {
                   </p>
                 </div>
               </div>
-              <div className="flex items-start gap-5 border-t border-white/[0.07] px-6 py-5 transition-colors duration-200 hover:bg-white/[0.025]">
-                <div className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-dourado/10">
+              <div className="group flex items-start gap-5 border-t border-white/[0.07] px-6 py-5 transition-colors duration-200 hover:bg-white/[0.025]">
+                <div className="icon-spring mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-dourado/10">
                   <Layers className="h-4 w-4 text-dourado" />
                 </div>
                 <div>
@@ -202,7 +202,7 @@ export function Curso() {
             {categories.map((cat, ci) => (
               <div
                 key={cat.id}
-                className="overflow-hidden rounded-2xl border border-white/[0.07] bg-[#0d0d0d]"
+                className="lift-card rounded-2xl border border-white/[0.07] bg-[#0d0d0d]"
               >
                 {/* Header da categoria */}
                 <div className="flex items-center gap-4 border-b border-white/[0.06] px-6 py-4">
