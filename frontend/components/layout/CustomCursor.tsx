@@ -12,19 +12,24 @@ export function CustomCursor() {
     const cursor = cursorRef.current
     if (!cursor) return
 
-    let x = 0, y = 0, tx = 0, ty = 0
+    let x = 0, y = 0, tx = 0, ty = 0, hovering = false
 
     const onMove = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY }
 
     const onOver = (e: MouseEvent) => {
-      const target = e.target as HTMLElement
-      cursor.dataset.state = target.closest('a, button, .reveal-photo') ? 'hover' : 'default'
+      const over = !!(e.target as HTMLElement).closest('a, button, .reveal-photo')
+      if (over !== hovering) {
+        hovering = over
+        cursor.dataset.state = over ? 'hover' : 'default'
+      }
     }
 
     const tick = () => {
-      x += (tx - x) * 0.12
-      y += (ty - y) * 0.12
-      cursor.style.transform = `translate3d(${x - 10}px, ${y - 10}px, 0)`
+      // 0.22 — responde em ~8 frames (≈130ms) em vez de ~18 frames (≈300ms)
+      x += (tx - x) * 0.22
+      y += (ty - y) * 0.22
+      // translate(-50%,-50%) centraliza independente do tamanho (normal ou hover)
+      cursor.style.transform = `translate3d(${x}px, ${y}px, 0) translate(-50%, -50%)`
       rafRef.current = requestAnimationFrame(tick)
     }
 
@@ -46,8 +51,8 @@ export function CustomCursor() {
         pointer-events-none fixed left-0 top-0 z-[80]
         hidden h-5 w-5 rounded-full border border-branco/70
         will-change-transform
-        transition-[width,height,border-color,background] duration-200
-        data-[state=hover]:h-12 data-[state=hover]:w-12
+        transition-[width,height,border-color,background] duration-150
+        data-[state=hover]:h-10 data-[state=hover]:w-10
         data-[state=hover]:border-dourado data-[state=hover]:bg-dourado/10
         md:block
       "
