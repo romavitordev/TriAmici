@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react'
@@ -14,6 +14,36 @@ export function Hero() {
   const titleRef = useRef<HTMLSpanElement>(null)
   const subRef   = useRef<HTMLSpanElement>(null)
   const descRef  = useRef<HTMLParagraphElement>(null)
+
+  // iOS/Safari não bufferiza <video> sem um play(), mesmo com preload="auto".
+  // Fazemos um "prime" mudo (play + pause imediato no frame 0) para forçar o
+  // download/decode e habilitar o scrubbing. O vídeo continua controlado só
+  // pelo scroll — este play é imperceptível (mudo e pausado no mesmo tick).
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    const prime = () => {
+      if (!video.paused) return
+      video.muted = true
+      const p = video.play()
+      if (p && typeof p.then === 'function') {
+        p.then(() => {
+          video.pause()
+          if (video.currentTime < 0.05) video.currentTime = 0
+        }).catch(() => {})
+      }
+    }
+
+    prime()
+    const onGesture = () => prime()
+    window.addEventListener('touchstart', onGesture, { once: true, passive: true })
+    window.addEventListener('pointerdown', onGesture, { once: true, passive: true })
+    return () => {
+      window.removeEventListener('touchstart', onGesture)
+      window.removeEventListener('pointerdown', onGesture)
+    }
+  }, [])
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
@@ -157,7 +187,7 @@ export function Hero() {
       </div>
 
       {/* SCROLL INDICATOR */}
-      <div className="absolute bottom-7 left-1/2 -translate-x-1/2 animate-bounce text-xs tracking-[0.3em] text-branco/55">
+      <div className="absolute bottom-20 left-1/2 -translate-x-1/2 animate-bounce pl-[0.3em] text-xs tracking-[0.3em] text-branco/55 md:bottom-7">
         SCROLL
       </div>
     </section>
