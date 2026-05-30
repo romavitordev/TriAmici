@@ -27,7 +27,7 @@ export function Hero() {
     if (!hero || !video || !title || !sub || !desc) return
 
     const isMobile = window.innerWidth < 768
-    const end      = isMobile ? '+=200%' : '+=400%'
+    const end      = isMobile ? '+=300%' : '+=400%'
 
     // Frame 0, sem autoplay
     video.pause()
@@ -40,6 +40,7 @@ export function Hero() {
     } else {
       video.addEventListener('loadedmetadata', () => {
         duration = video.duration
+        video.currentTime = 0 // pinta o primeiro frame assim que a metadata chega
       }, { once: true })
     }
 
@@ -110,9 +111,13 @@ export function Hero() {
       <video
         ref={videoRef}
         src="/midias/video_bg.mp4"
+        poster="/midias/camera_bg.png"
         muted
         playsInline
         preload="auto"
+        controls={false}
+        disablePictureInPicture
+        tabIndex={-1}
         className="absolute inset-0 h-full w-full object-cover"
       />
 
