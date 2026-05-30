@@ -56,13 +56,13 @@ export default function ContatoPage() {
           )}
         </div>
 
-        <aside className="mt-4 border border-borda bg-escuro p-6 md:p-8">
+        <aside className="accent-card mt-4 border border-borda bg-escuro p-6 md:p-8">
           <h2 className="font-serif text-3xl text-dourado">Tri Amici Academy</h2>
           <div className="mt-8 grid gap-5 text-cinza">
-            <p className="flex gap-3"><Phone className="text-dourado" /> (15) 3321-3365</p>
-            <p className="flex gap-3"><MessageCircle className="text-dourado" /> (15) 9 8112-7508</p>
-            <p className="flex gap-3"><Mail className="text-dourado" /> escola@triamici.com.br</p>
-            <p className="flex gap-3"><MapPin className="text-dourado" /> Rua Amapa 112, Vila Augusto, Sorocaba, SP - 18040-050</p>
+            <p className="group flex gap-3"><Phone className="icon-spring text-dourado" /> (15) 3321-3365</p>
+            <p className="group flex gap-3"><MessageCircle className="icon-spring text-dourado" /> (15) 9 8112-7508</p>
+            <p className="group flex gap-3"><Mail className="icon-spring text-dourado" /> escola@triamici.com.br</p>
+            <p className="group flex gap-3"><MapPin className="icon-spring text-dourado" /> Rua Amapa 112, Vila Augusto, Sorocaba, SP - 18040-050</p>
             <p>CNPJ: xx.xxx.xxx/xxxx-xx</p>
           </div>
           <iframe title="Mapa Tri Amici" className="mt-8 h-72 w-full border-0 grayscale" loading="lazy" src="https://www.google.com/maps?q=Rua%20Amap%C3%A1%20112%20Sorocaba%20SP&output=embed" />

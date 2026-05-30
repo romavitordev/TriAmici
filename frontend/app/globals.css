@@ -245,6 +245,35 @@ a {
   transform: scaleX(1);
 }
 
+/* Variante sem transform (para cards em movimento, ex.: carrossel coverflow).
+   Mantém a barra de gradiente + brilho de borda/sombra, sem o translateY que
+   conflita com o transform do Swiper e causa jitter. */
+.accent-card {
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.45s ease, border-color 0.35s ease;
+}
+
+.accent-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  transform: scaleX(0);
+  transform-origin: left;
+  background: linear-gradient(90deg, var(--cor-dourado), var(--cor-dourado-suave), var(--cor-dourado));
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.accent-card:hover {
+  border-color: rgba(201, 168, 76, 0.55);
+  box-shadow: 0 18px 48px rgba(201, 168, 76, 0.12);
+}
+
+.accent-card:hover::before {
+  transform: scaleX(1);
+}
+
 /* Ícone com leve "spring" quando o card/linha (.group) é hoverado */
 .icon-spring {
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), background-color 0.3s ease;

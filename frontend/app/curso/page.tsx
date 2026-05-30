@@ -127,8 +127,8 @@ export default function CursoPage() {
           <div className="mt-14 border-t border-borda">
             {modulos.map((mod, i) => (
               <ScrollReveal key={mod.num} delay={i * 0.05}>
-                <div className="grid grid-cols-[3rem_1fr] gap-6 border-b border-borda py-7 transition-colors hover:bg-escuro/30 md:grid-cols-[5rem_1fr] md:gap-10 md:py-9">
-                  <span className="pt-1 font-serif text-xl text-dourado/50 md:text-2xl">{mod.num}</span>
+                <div className="group grid grid-cols-[3rem_1fr] gap-6 border-b border-borda py-7 transition-colors hover:bg-escuro/30 md:grid-cols-[5rem_1fr] md:gap-10 md:py-9">
+                  <span className="pt-1 font-serif text-xl text-dourado/50 transition-colors duration-300 group-hover:text-dourado md:text-2xl">{mod.num}</span>
                   <div>
                     <h3 className="font-serif text-lg leading-snug md:text-2xl">{mod.titulo}</h3>
                     <p className="mt-2 text-sm leading-7 text-cinza">{mod.desc}</p>
@@ -152,8 +152,8 @@ export default function CursoPage() {
           <div className="mt-14 grid border border-borda md:grid-cols-3">
             {pilares.map(({ Icon, titulo, desc }, i) => (
               <ScrollReveal key={titulo} delay={i * 0.1}>
-                <div className={`p-8 md:p-10 ${i < 2 ? 'border-b border-borda md:border-b-0 md:border-r' : ''}`}>
-                  <Icon size={28} className="text-dourado" strokeWidth={1.5} />
+                <div className={`group p-8 transition-colors duration-300 hover:bg-white/[0.02] md:p-10 ${i < 2 ? 'border-b border-borda md:border-b-0 md:border-r' : ''}`}>
+                  <Icon size={28} className="icon-spring text-dourado" strokeWidth={1.5} />
                   <h3 className="mt-7 font-serif text-3xl text-dourado">{titulo}</h3>
                   <p className="mt-4 text-sm leading-7 text-cinza">{desc}</p>
                 </div>
