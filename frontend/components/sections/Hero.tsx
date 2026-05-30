@@ -157,17 +157,17 @@ export function Hero() {
       {/* CONTEÚDO */}
       <div className="relative z-10 flex max-w-5xl flex-col items-center text-center">
 
-        <p className="section-kicker mb-8 [text-shadow:0_0_24px_rgba(0,0,0,1),0_2px_8px_rgba(0,0,0,0.9)]">
+        <p className="section-kicker mb-4 [text-shadow:0_0_24px_rgba(0,0,0,1),0_2px_8px_rgba(0,0,0,0.9)] md:mb-8">
           Sorocaba · SP · Desde 2000
         </p>
 
-        <h1 className="font-serif text-5xl leading-[1.05] md:text-8xl">
+        <h1 className="font-serif text-[clamp(2.1rem,8.5vw,2.75rem)] leading-[1.05] md:text-8xl">
           <span ref={titleRef} className="block will-change-[transform,opacity]">
             Fotografia que muda
           </span>
           <span
             ref={subRef}
-            className="mt-4 block font-serif italic text-dourado opacity-0 will-change-[transform,opacity]"
+            className="mt-2 block font-serif italic text-dourado opacity-0 will-change-[transform,opacity] md:mt-4"
           >
             quem você é.
           </span>
@@ -175,12 +175,12 @@ export function Hero() {
 
         <p
           ref={descRef}
-          className="mx-auto mt-10 max-w-3xl text-lg leading-8 text-branco/80 will-change-[transform,opacity]"
+          className="mx-auto mt-5 max-w-3xl text-base leading-relaxed text-branco/80 will-change-[transform,opacity] md:mt-10 md:text-lg md:leading-8"
         >
           25 anos formando fotógrafos profissionais com o método mais completo da região.
         </p>
 
-        <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
+        <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 md:mt-12">
           <Button href="/contato">Quero a aula gratuita</Button>
           <Button href="/sobre" variant="outline">Conheça a escola</Button>
         </div>
