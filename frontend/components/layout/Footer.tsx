@@ -3,7 +3,7 @@ import { Facebook, Instagram, MessageCircle, Send } from 'lucide-react'
 
 export function Footer() {
   return (
-    <footer className="border-t border-dourado/30 bg-preto py-14">
+    <footer className="border-t border-dourado/30 bg-preto pt-14 pb-24 md:pb-14">
       <div className="container-page grid gap-10 md:grid-cols-[1.3fr_0.8fr_1fr]">
         <div>
           <div className="font-serif text-3xl tracking-[0.12em] text-dourado">TRI AMICI</div>

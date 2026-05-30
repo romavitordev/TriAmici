@@ -1,6 +1,7 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
+import Script from 'next/script'
 
 import { Cormorant_Garamond, DM_Sans, Playfair_Display } from 'next/font/google'
 
@@ -34,6 +35,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${playfair.variable} ${dmSans.variable} ${cormorant.variable}`}>
+      {/*
+        beforeInteractive = executa síncrono no <head> durante o parsing HTML,
+        antes que qualquer scroll restoration do browser aconteça.
+        history.scrollRestoration = 'manual' impede o browser de restaurar
+        scroll position em refresh/reopen, garantindo que a Hero sempre
+        comece no frame 0.
+      */}
+      <Script id="disable-scroll-restore" strategy="beforeInteractive">{`
+        if ('scrollRestoration' in history) {
+          history.scrollRestoration = 'manual';
+        }
+      `}</Script>
       <body className="font-sans cursor-none">
 
         <LenisProvider />
@@ -41,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <CustomCursor />
         <Header />
         <PageTransition>
-          <main>{children}</main>
+          <main className="overflow-x-hidden">{children}</main>
         </PageTransition>
         <Footer />
         <AudioPlayer />

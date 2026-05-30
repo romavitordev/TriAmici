@@ -14,7 +14,7 @@ export function CtaFinal() {
       <div className="absolute inset-0 bg-gradient-to-r from-preto/80 via-preto/50 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-t from-preto/60 via-transparent to-transparent" />
 
-      <div className="container-page relative z-10 flex min-h-[65vh] flex-col items-center justify-center py-24 text-center md:items-start md:text-left">
+      <div className="container-page relative z-10 flex min-h-[65vh] flex-col items-center justify-center py-24 pb-24 text-center md:items-start md:text-left">
         <p className="section-kicker">Aula gratuita</p>
         <h2 className="mt-5 max-w-2xl font-serif text-4xl leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
           Venha conhecer a escola numa aula gratuita.

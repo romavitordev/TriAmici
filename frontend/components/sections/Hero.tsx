@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { useRef } from 'react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
@@ -10,89 +9,94 @@ import { Button } from '@/components/ui/Button'
 gsap.registerPlugin(ScrollTrigger)
 
 export function Hero() {
-  const heroRef = useRef<HTMLElement>(null)
-
-  const bgRef = useRef<HTMLDivElement>(null)
+  const heroRef  = useRef<HTMLElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const titleRef = useRef<HTMLSpanElement>(null)
-  const subRef = useRef<HTMLSpanElement>(null)
-  const descRef = useRef<HTMLParagraphElement>(null)
+  const subRef   = useRef<HTMLSpanElement>(null)
+  const descRef  = useRef<HTMLParagraphElement>(null)
 
   useGSAP(() => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
-    const hero = heroRef.current
-    const bg = bgRef.current
+    const hero  = heroRef.current
+    const video = videoRef.current
     const title = titleRef.current
-    const sub = subRef.current
-    const desc = descRef.current
+    const sub   = subRef.current
+    const desc  = descRef.current
 
-    if (!hero || !bg || !title || !sub || !desc) return
+    if (!hero || !video || !title || !sub || !desc) return
 
     const isMobile = window.innerWidth < 768
+    const end      = isMobile ? '+=200%' : '+=400%'
+
+    // Frame 0, sem autoplay
+    video.pause()
+    video.currentTime = 0
+
+    // Duração real — preenchida por loadedmetadata ou já disponível em cache
+    let duration = 0
+    if (video.readyState >= 1 && isFinite(video.duration) && video.duration > 0) {
+      duration = video.duration
+    } else {
+      video.addEventListener('loadedmetadata', () => {
+        duration = video.duration
+      }, { once: true })
+    }
+
+    /*
+     * Proxy JS puro: GSAP anima proxy.t de 0 → 1 via scrub.
+     *
+     * Por que tween onUpdate em vez de ScrollTrigger onUpdate + quickTo:
+     *
+     * - ScrollTrigger.onUpdate dispara em eventos de scroll (raw Lenis position)
+     * - quickTo com duration cria uma segunda animação independente que "persegue"
+     *   o alvo — quando a direção muda, proxy.t parte de um valor intermediário,
+     *   causando salto de frame visível.
+     *
+     * - tween.onUpdate dispara no mesmo tick em que o GSAP scrub move o
+     *   playhead da timeline — forward E backward — sem animação secundária.
+     *   proxy.t = exatamente onde o scrub colocou (0 a 1). Sem lag extra.
+     *
+     * Lenis já suaviza o scroll. scrub:true deixa o GSAP mapear diretamente
+     * a posição suavizada do Lenis para o progresso da timeline.
+     * Não há dupla suavização.
+     */
+    const proxy = { t: 0 }
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: hero,
         start: 'top top',
-        end: isMobile ? '+=200%' : '+=400%',
-        scrub: isMobile ? 0.8 : 1.2,
+        end,
         pin: true,
-        anticipatePin: 1
-      }
+        anticipatePin: 1,
+        scrub: true,             // mapeia diretamente Lenis → playhead
+        invalidateOnRefresh: true,
+      },
     })
 
-    // 🎥 ZOOM SUAVE DE FUNDO
-    tl.to(bg, {
-      scale: 1.12,
-      ease: 'none'
+    // Scrub do vídeo: proxy.t vai 0→1, onUpdate do tween (não do ST) é
+    // chamado a cada tick GSAP em ambas as direções — forward e backward.
+    tl.to(proxy, {
+      t: 1,
+      ease: 'none',
+      onUpdate() {
+        if (duration <= 0) return
+        video.currentTime = proxy.t * duration
+      },
     }, 0)
 
-    // ─────────────────────────────
-    // 🧠 TÍTULO ESTÁVEL (não perde foco rápido)
-    // ─────────────────────────────
-    tl.fromTo(
-      title,
-      {
-        opacity: 1,
-        scale: 1.06,
-        y: 0
-      },
-      {
-        opacity: 0.75,
-        scale: 1,
-        y: -5,
-        ease: 'none'
-      },
-      0.2
-    )
-
-    // ─────────────────────────────
-    // 🎯 SUBTÍTULO ENTRA DEVAGAR
-    // ─────────────────────────────
-    tl.fromTo(
-      sub,
+    // Texto na mesma timeline — mesma direção, mesmo scrub
+    tl.fromTo(title,
+      { opacity: 1, scale: 1.06, y: 0  },
+      { opacity: 0.75, scale: 1, y: -5, ease: 'none' }, 0.2)
+    tl.fromTo(sub,
       { opacity: 0, y: 30, scale: 0.95 },
-      { opacity: 1, y: 8,  scale: 1,   ease: 'none' },
-      0.5
-    )
-
-    tl.fromTo(
-      desc,
+      { opacity: 1, y: 8, scale: 1, ease: 'none' }, 0.5)
+    tl.fromTo(desc,
       { opacity: 0, y: 50 },
-      { opacity: 1, y: 0,  ease: 'none' },
-      0.78
-    )
-
-    // ─────────────────────────────
-    // 🌫️ FINAL — “SOFT EXIT” (isso resolve o seu problema do scroll duro)
-    // ─────────────────────────────
-    tl.to(
-      hero,
-      {
-        opacity: 0.95,
-        ease: 'power2.out'
-      },
-      0.92
-    )
+      { opacity: 1, y: 0, ease: 'none' }, 0.78)
+    tl.to(hero, { opacity: 0.95, ease: 'power2.out' }, 0.92)
 
     ScrollTrigger.refresh()
   }, [])
@@ -100,24 +104,25 @@ export function Hero() {
   return (
     <section
       ref={heroRef}
-      className="relative min-h-screen overflow-hidden bg-preto px-4 py-28 flex items-center justify-center"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden bg-preto px-4 py-28"
     >
-      {/* 🎥 BACKGROUND */}
-      <div ref={bgRef} className="absolute inset-0 will-change-transform">
-        <Image
-          src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?auto=format&fit=crop&w=1800&q=85"
-          alt="Camera fotografica em detalhe"
-          fill
-          priority
-          className="object-cover opacity-45"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-preto/30 via-preto/55 to-preto" />
-      </div>
+      {/* VÍDEO — pausado, frame 0 */}
+      <video
+        ref={videoRef}
+        src="/video_bg.mp4"
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover"
+      />
 
-      {/* 🧠 CONTEÚDO */}
-      <div className="relative z-10 max-w-5xl flex flex-col items-center text-center">
+      {/* GRADIENTE */}
+      <div className="absolute inset-0 bg-gradient-to-b from-preto/10 via-preto/50 to-preto" />
 
-        <p className="section-kicker mb-8">
+      {/* CONTEÚDO */}
+      <div className="relative z-10 flex max-w-5xl flex-col items-center text-center">
+
+        <p className="section-kicker mb-8 [text-shadow:0_0_24px_rgba(0,0,0,1),0_2px_8px_rgba(0,0,0,0.9)]">
           Sorocaba · SP · Desde 2000
         </p>
 
@@ -125,10 +130,9 @@ export function Hero() {
           <span ref={titleRef} className="block will-change-[transform,opacity]">
             Fotografia que muda
           </span>
-
           <span
             ref={subRef}
-            className="block mt-4 font-serif italic text-dourado opacity-0 will-change-[transform,opacity]"
+            className="mt-4 block font-serif italic text-dourado opacity-0 will-change-[transform,opacity]"
           >
             quem você é.
           </span>
@@ -143,9 +147,7 @@ export function Hero() {
 
         <div className="mt-12 flex flex-col items-center justify-center gap-4 sm:flex-row">
           <Button href="/contato">Quero a aula gratuita</Button>
-          <Button href="/sobre" variant="outline">
-            Conheça a escola
-          </Button>
+          <Button href="/sobre" variant="outline">Conheça a escola</Button>
         </div>
       </div>
 

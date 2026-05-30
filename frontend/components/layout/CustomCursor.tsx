@@ -12,7 +12,15 @@ export function CustomCursor() {
     const cursor = cursorRef.current
     if (!cursor) return
 
-    let x = 0, y = 0, tx = 0, ty = 0, hovering = false
+    let x = -100, y = -100, tx = -100, ty = -100, hovering = false
+
+    // Mantém o cursor fora da tela até o primeiro mousemove
+    const onFirstMove = (e: MouseEvent) => {
+      tx = e.clientX
+      ty = e.clientY
+      cursor.style.opacity = '1'
+    }
+    window.addEventListener('mousemove', onFirstMove, { once: true, passive: true })
 
     const onMove = (e: MouseEvent) => { tx = e.clientX; ty = e.clientY }
 
@@ -38,6 +46,7 @@ export function CustomCursor() {
     rafRef.current = requestAnimationFrame(tick)
 
     return () => {
+      window.removeEventListener('mousemove', onFirstMove)
       window.removeEventListener('mousemove', onMove)
       window.removeEventListener('mouseover', onOver)
       cancelAnimationFrame(rafRef.current)
@@ -50,8 +59,8 @@ export function CustomCursor() {
       className="
         pointer-events-none fixed left-0 top-0 z-[80]
         hidden h-5 w-5 rounded-full border border-branco/70
-        will-change-transform
-        transition-[width,height,border-color,background] duration-150
+        opacity-0 will-change-transform
+        transition-[width,height,border-color,background,opacity] duration-150
         data-[state=hover]:h-10 data-[state=hover]:w-10
         data-[state=hover]:border-dourado data-[state=hover]:bg-dourado/10
         md:block

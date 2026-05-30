@@ -17,11 +17,11 @@ const timeline = [
 
 export default function SobrePage() {
   return (
-    <section className="bg-preto pb-24 pt-32">
+    <section className="bg-preto pb-24 pt-24 md:pt-32">
       <div className="container-page">
         <ScrollReveal>
           <p className="section-kicker">Sobre a escola</p>
-          <h1 className="mt-4 max-w-4xl font-serif text-5xl leading-tight md:text-7xl">Uma casa para aprender fotografia com presenca, oficio e arte.</h1>
+          <h1 className="mt-4 max-w-4xl font-serif text-4xl leading-tight md:text-5xl lg:text-7xl">Uma casa para aprender fotografia com presenca, oficio e arte.</h1>
         </ScrollReveal>
 
         <div className="mt-14 grid gap-8 lg:grid-cols-[1.1fr_0.9fr]">
@@ -36,7 +36,7 @@ export default function SobrePage() {
           </ScrollReveal>
         </div>
 
-        <div className="mt-20 grid gap-5 md:grid-cols-4">
+        <div className="mt-20 grid grid-cols-2 gap-5 md:grid-cols-4">
           {timeline.map(([year, text], index) => (
             <Card key={year}>
               <span className="font-serif text-4xl text-dourado">{year}</span>
