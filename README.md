@@ -5,13 +5,13 @@ Monorepo full-stack para o novo site da Tri Amici Photography Academy, em Soroca
 ## Stack
 
 - Frontend: Next.js 14, TypeScript, Tailwind CSS, Framer Motion, GSAP, Lenis e Swiper.
-- Backend: Node.js 20, Express, TypeScript, SQL Server via `mssql`, JWT, Zod e Nodemailer.
-- Banco: SQL Server 2022 em Docker.
+- Backend: Node.js 20, Express, TypeScript, SQL Server via `mssql`, Zod e Nodemailer.
+- Banco: SQL Server 2022.
 
 ## Como rodar (sem Docker)
 
 ### Requisitos
-- Ter um **SQL Server** rodando localmente (fora do Docker) e acessível.
+- Ter um **SQL Server** rodando localmente e acessível.
 
 ### 1) Configurar ambiente (.env)
 1. Crie um arquivo `.env` no **root** e/ou no **backend** (recomendado no `backend/`), com base no que o projeto espera (exatamente os nomes abaixo):
@@ -19,7 +19,6 @@ Monorepo full-stack para o novo site da Tri Amici Photography Academy, em Soroca
 **Backend (exemplo de variáveis):**
 - `PORT=3001`
 - `CORS_ORIGIN=http://localhost:3000`
-- `JWT_SECRET=...`
 - `DB_SERVER=localhost`
 - `DB_PORT=1433`
 - `DB_NAME=triamici_db`
@@ -30,7 +29,9 @@ Monorepo full-stack para o novo site da Tri Amici Photography Academy, em Soroca
 - `SMTP_USER=...`
 - `SMTP_PASS=...`
 - `EMAIL_DESTINO=...`
-<!-- Admin credentials removed: this project does not include an admin UI by default -->
+
+No **frontend**, crie um `.env` (ou `.env.local`) com:
+- `NEXT_PUBLIC_API_URL=http://localhost:3001`
 
 > O backend carrega `.env` via `dotenv/config`.
 
@@ -56,10 +57,16 @@ O backend fica em: **http://localhost:3001/api**
 ```bash
 cd frontend
 npm install
-npm start
+npm run dev
 ```
+> Para rodar em modo produção: `npm run build` e depois `npm start`.
 
 O frontend fica em: **http://localhost:3000**
+
+## Mídias
+
+Todos os arquivos de mídia (vídeo, imagens, áudio) ficam em `frontend/public/midias/`
+e são servidos pela raiz `/midias/...` (ex.: `/midias/video_bg.mp4`).
 
 
 ## Rotas principais

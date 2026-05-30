@@ -33,7 +33,7 @@ export function AudioPlayer() {
 
   return (
     <div className="fixed bottom-5 right-5 z-50 flex h-11 w-11 items-center gap-3 overflow-hidden border border-dourado/40 bg-preto/85 px-3 text-branco backdrop-blur transition-[width] duration-300 hover:w-64">
-      <audio ref={audioRef} src="/audio/jingle-triamici.mp3" loop />
+      <audio ref={audioRef} src="/midias/jingle-triamici.mp3" loop />
       <button onClick={toggle} aria-label="Tocar jingle Tri Amici" className="grid h-6 w-6 shrink-0 place-items-center text-dourado">
         {playing ? <Pause size={16} /> : <Play size={16} />}
       </button>

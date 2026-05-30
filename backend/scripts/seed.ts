@@ -2,7 +2,7 @@ import { connectDB, disconnectDB } from '../src/database/sqlserver.js'
 
 async function main() {
   await connectDB()
-  console.log('Seeds: no admin to create')
+  console.log('Seeds: nada a popular via script (use as migrations 002/003 para depoimentos e galeria)')
   await disconnectDB()
 }
 

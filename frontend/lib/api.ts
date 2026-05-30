@@ -1,4 +1,4 @@
-const publicUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080'
+const publicUrl = process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'
 const internalUrl = process.env.INTERNAL_API_URL ?? publicUrl
 
 export const apiBaseUrl = typeof window === 'undefined' ? internalUrl : publicUrl

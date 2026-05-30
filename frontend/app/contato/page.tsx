@@ -12,7 +12,7 @@ export default function ContatoPage() {
   const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<ContactForm>({ resolver: zodResolver(contactSchema) })
 
   const onSubmit = async (data: ContactForm) => {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:8080'}/api/contato`, {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'}/api/contato`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ...data, tipo: 'AULA_GRATIS' })

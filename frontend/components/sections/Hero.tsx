@@ -109,7 +109,7 @@ export function Hero() {
       {/* VÍDEO — pausado, frame 0 */}
       <video
         ref={videoRef}
-        src="/video_bg.mp4"
+        src="/midias/video_bg.mp4"
         muted
         playsInline
         preload="auto"
