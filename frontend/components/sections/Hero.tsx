@@ -118,7 +118,7 @@ export function Hero() {
         controls={false}
         disablePictureInPicture
         tabIndex={-1}
-        className="absolute inset-0 h-full w-full object-cover object-[58%_50%] md:object-center"
+        className="absolute inset-0 h-full w-full object-cover object-[54%_50%] md:object-center"
       />
 
       {/* GRADIENTE */}
