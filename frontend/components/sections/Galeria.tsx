@@ -36,7 +36,9 @@ export function Galeria() {
             <p className="section-kicker">Galeria</p>
             <h2 className="mt-4 font-serif text-4xl md:text-6xl">1.600 fotos de nossos alunos.</h2>
           </div>
-          <a href="https://www.flickr.com/groups/tri_amici_students/pool/" className="btn btn-outline">Ver galeria no Flickr</a>
+          <Button href="https://www.flickr.com/groups/tri_amici_students/pool/" variant="outline">
+            Ver galeria no Flickr
+          </Button>
         </div>
         <div className="mt-12 columns-1 gap-5 sm:columns-2 lg:columns-3">
           {fotos.map((foto, index) => (
