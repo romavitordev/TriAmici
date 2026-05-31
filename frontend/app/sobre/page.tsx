@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Image from 'next/image'
 import { Card } from '@/components/ui/Card'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
+import { Recursos } from '@/components/sections/Recursos'
 
 export const metadata: Metadata = {
   title: 'Sobre a Escola',
@@ -17,6 +18,7 @@ const timeline = [
 
 export default function SobrePage() {
   return (
+    <>
     <section className="bg-preto pb-24 pt-24 md:pt-32">
       <div className="container-page">
         <ScrollReveal>
@@ -59,5 +61,7 @@ export default function SobrePage() {
         </div>
       </div>
     </section>
+    <Recursos />
+    </>
   )
 }

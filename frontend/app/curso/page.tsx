@@ -164,6 +164,9 @@ export default function CursoPage() {
         </div>
       </section>
 
+      {/* ── MATERIAIS (e-book + fotos dos alunos) ────────────── */}
+      <Recursos />
+
       {/* ── PARA QUEM É ──────────────────────────────────────── */}
       <section className="bg-preto py-24">
         <div className="container-page">
@@ -235,9 +238,6 @@ export default function CursoPage() {
           </div>
         </div>
       </section>
-
-      {/* ── MATERIAIS (e-book + fotos dos alunos) ────────────── */}
-      <Recursos />
 
       {/* ── CTA FINAL ────────────────────────────────────────── */}
       <section className="relative min-h-[60vh] overflow-hidden bg-preto">
