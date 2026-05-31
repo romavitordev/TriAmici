@@ -7,7 +7,13 @@ import { Recursos } from '@/components/sections/Recursos'
 
 export const metadata: Metadata = {
   title: 'Curso Profissional de Fotografia',
-  description: 'Curso profissional de fotografia Tri Amici: prático, intenso, divertido e sem conhecimento prévio necessário.'
+  description: 'Curso profissional de fotografia Tri Amici: prático, intenso, divertido e sem conhecimento prévio necessário.',
+  alternates: { canonical: '/curso' },
+  openGraph: {
+    title: 'Curso Profissional de Fotografia | Tri Amici',
+    description: 'Curso profissional de fotografia Tri Amici: prático, intenso, divertido e sem conhecimento prévio necessário.',
+    url: 'https://triamici.com.br/curso'
+  }
 }
 
 const modulos = [

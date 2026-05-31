@@ -19,5 +19,8 @@ export const config = {
   },
   smtp: {
     destino: process.env.EMAIL_DESTINO ?? 'escola@triamici.com.br',
+    // Remetente. Enquanto o domínio não estiver verificado no Resend,
+    // use o remetente de testes 'onboarding@resend.dev' (default).
+    from: process.env.EMAIL_FROM ?? 'Tri Amici Site <onboarding@resend.dev>',
   },
 }
