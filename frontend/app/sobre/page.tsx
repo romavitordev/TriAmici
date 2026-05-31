@@ -61,7 +61,10 @@ export default function SobrePage() {
         </div>
       </div>
     </section>
-    <Recursos />
+    <Recursos
+      titulo="Continue conhecendo a Tri Amici."
+      descricao="Leve o e-book da escola e explore o acervo com mais de 1.600 fotos feitas pelos alunos."
+    />
     </>
   )
 }

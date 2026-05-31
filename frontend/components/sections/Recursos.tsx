@@ -6,18 +6,25 @@ const EBOOK_URL =
   'https://www.triamici.com.br/_files/ugd/d43b4b_a72e514c62e94f979d9470fa8eae01df.pdf'
 const FLICKR_URL = 'https://www.flickr.com/groups/tri_amici_students/pool/'
 
-export function Recursos() {
+type Props = {
+  titulo?: string
+  descricao?: string
+}
+
+export function Recursos({
+  titulo = 'Explore a escola antes mesmo de começar.',
+  descricao = 'Baixe o e-book gratuito da escola e veja as imagens que os alunos criaram durante o curso.',
+}: Props = {}) {
   return (
     <section className="bg-preto py-24 md:py-32">
       <div className="container-page">
         <ScrollReveal>
           <p className="section-kicker">Materiais</p>
           <h2 className="mt-4 max-w-2xl font-serif text-4xl md:text-5xl">
-            Explore a escola antes mesmo de começar.
+            {titulo}
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-cinza">
-            Baixe o e-book gratuito da escola e veja as imagens que os alunos criaram
-            durante o curso.
+            {descricao}
           </p>
         </ScrollReveal>
 

@@ -165,7 +165,10 @@ export default function CursoPage() {
       </section>
 
       {/* ── MATERIAIS (e-book + fotos dos alunos) ────────────── */}
-      <Recursos />
+      <Recursos
+        titulo="Material do curso e resultados reais."
+        descricao="Baixe o e-book com o conteúdo completo e veja o que os alunos produziram durante as aulas."
+      />
 
       {/* ── PARA QUEM É ──────────────────────────────────────── */}
       <section className="bg-preto py-24">
