@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { Camera, Eye, TrendingUp } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { ScrollReveal } from '@/components/ui/ScrollReveal'
+import { Recursos } from '@/components/sections/Recursos'
 
 export const metadata: Metadata = {
   title: 'Curso Profissional de Fotografia',
@@ -234,6 +235,9 @@ export default function CursoPage() {
           </div>
         </div>
       </section>
+
+      {/* ── MATERIAIS (e-book + fotos dos alunos) ────────────── */}
+      <Recursos />
 
       {/* ── CTA FINAL ────────────────────────────────────────── */}
       <section className="relative min-h-[60vh] overflow-hidden bg-preto">
