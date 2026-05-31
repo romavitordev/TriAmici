@@ -39,7 +39,12 @@ DB_PASSWORD=sua_senha
 # Resend
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 EMAIL_DESTINO=voce@exemplo.com
+# Remetente: enquanto o dominio nao estiver validado no Resend, use o sender de testes
+EMAIL_FROM=Tri Amici Site <onboarding@resend.dev>
 ```
+
+> Alternativa ao bloco `DB_*`: defina uma única `DATABASE_URL=postgres://user:pass@host:5432/db` (tem prioridade).
+> Sem `RESEND_API_KEY` o backend **sobe normalmente** — apenas não envia e-mails (registra o motivo no log).
 
 Crie `frontend/.env.local`:
 ```
@@ -91,6 +96,24 @@ npm run dev
 }
 ```
 tipo aceita "CONTATO" ou "AULA_GRATIS".
+
+---
+
+## Qualidade e testes
+Scripts de validação (a partir da raiz do projeto):
+```bash
+./scripts/test-backend.sh    # typecheck + build + testes unitarios do backend
+./scripts/test-frontend.sh   # typecheck + lint + build do frontend
+./scripts/test-db.sh         # conexao + migrations + seed (pula com aviso se nao houver PostgreSQL)
+API_URL=http://localhost:3001 ./scripts/test-api.sh   # testa os endpoints contra uma instancia viva
+```
+Comandos por workspace:
+```bash
+npm --workspace backend run typecheck   # tsc --noEmit
+npm --workspace backend test            # node:test (schemas + mailer)
+npm --workspace frontend run lint        # next lint
+npm --workspace frontend run typecheck   # tsc --noEmit
+```
 
 ---
 
@@ -184,8 +207,10 @@ TriAmici/
 │   │   └── server.ts
 │   └── ecosystem.config.cjs
 ├── frontend/
+│   ├── app/              # Rotas (App Router): /, /curso, /sobre, /contato, robots.ts, sitemap.ts
+│   ├── components/       # layout/, sections/, ui/
+│   ├── lib/              # api.ts, validations.ts, easings.ts
 │   ├── public/midias/    # Vídeo, áudio, imagens estáticas
-│   ├── src/
 │   └── ecosystem.config.cjs
 ├── nginx/
 │   └── triamici.conf     # Config Nginx para produção
@@ -203,5 +228,19 @@ TriAmici/
 
 ---
 
-Se quiser que eu aplique automaticamente as mudanças (migrations, `src/database/postgres.ts`, `src/email/mailer.ts`, updates nos repositories e scripts), autorizo a proceder. Caso prefira, posso gerar os patches passo a passo para revisão.
+## Troubleshooting
+
+| Sintoma | Causa provável | Solução |
+|---------|----------------|---------|
+| `Cannot find module './database/sqlserver.js'` | Resquício da migração mssql→pg | Já corrigido (`server.ts` importa `postgres.js`). |
+| `Missing API key` ao subir o backend | `RESEND_API_KEY` vazia em versão antiga do mailer | Já corrigido (cliente Resend instanciado de forma preguiçosa). |
+| devDependencies não instaladas (`tsc`/`tsx`/`@types` ausentes) | `NODE_ENV=production` faz o npm omitir devDeps | `NODE_ENV=development npm install --include=dev`. |
+| `next lint` abre prompt interativo | ESLint não configurado | Já incluso `.eslintrc.json` (`next/core-web-vitals`). |
+| `/api/depoimentos` e `/api/galeria` retornam 500 | PostgreSQL indisponível | Suba o banco e rode `npm run migrate` (veja `/api/health` → `db:false`). |
+| E-mail não chega | Domínio não validado no Resend | Use `EMAIL_FROM=...<onboarding@resend.dev>` até validar o domínio. |
+| `pm2` não encontra o binário do Next | Hoisting de workspaces | Os `ecosystem.config.cjs` já usam `cwd` fixo e `npm start`. |
+
+---
+
+> **Estado atual:** veja `STATUS.md` (validações executadas) e `TODO.md` (pendências, incluindo as de infraestrutura).
 

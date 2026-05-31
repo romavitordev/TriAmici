@@ -6,7 +6,13 @@ import { Recursos } from '@/components/sections/Recursos'
 
 export const metadata: Metadata = {
   title: 'Sobre a Escola',
-  description: 'Conheca a historia, o metodo e a casa da Tri Amici Photography Academy em Sorocaba.'
+  description: 'Conheca a historia, o metodo e a casa da Tri Amici Photography Academy em Sorocaba.',
+  alternates: { canonical: '/sobre' },
+  openGraph: {
+    title: 'Sobre a Escola | Tri Amici',
+    description: 'Conheca a historia, o metodo e a casa da Tri Amici Photography Academy em Sorocaba.',
+    url: 'https://triamici.com.br/sobre'
+  }
 }
 
 const timeline = [

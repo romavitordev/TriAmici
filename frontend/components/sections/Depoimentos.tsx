@@ -115,7 +115,7 @@ export function Depoimentos() {
                   )}
                 </div>
               </div>
-              <p className="mt-8 text-lg leading-8 text-branco/82">"{item.texto}"</p>
+              <p className="mt-8 text-lg leading-8 text-branco/82">&ldquo;{item.texto}&rdquo;</p>
             </article>
           </SwiperSlide>
         ))}

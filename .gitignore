@@ -4,6 +4,12 @@ node_modules
 backend/dist
 frontend/.next
 
-# Ambiente
+# Ambiente (segredos nunca versionados — exceto os *.example)
 .env
-.env.local
+.env.*
+!.env.example
+!.env.production.example
+
+# Logs / PM2
+*.log
+.pm2
