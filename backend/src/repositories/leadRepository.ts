@@ -1,53 +1,46 @@
-import { getPool, sql } from '../database/sqlserver.js'
+import { getPool } from '../database/postgres.js'
 import type { LeadInput } from '../types/index.js'
 
 export async function createLead(data: LeadInput): Promise<string> {
-  const result = await getPool()
-    .request()
-    .input('nome', sql.NVarChar(200), data.nome)
-    .input('email', sql.NVarChar(200), data.email)
-    .input('telefone', sql.NVarChar(50), data.telefone ?? null)
-    .input('mensagem', sql.NVarChar(sql.MAX), data.mensagem ?? null)
-    .input('tipo', sql.NVarChar(20), data.tipo ?? 'CONTATO')
-    .query(`
-      INSERT INTO leads (nome, email, telefone, mensagem, tipo)
-      OUTPUT INSERTED.id
-      VALUES (@nome, @email, @telefone, @mensagem, @tipo)
-    `)
-
-  return result.recordset[0].id
+  const result = await getPool().query<{ id: string }>(
+    `INSERT INTO leads (nome, email, telefone, mensagem, tipo)
+     VALUES ($1, $2, $3, $4, $5)
+     RETURNING id`,
+    [data.nome, data.email, data.telefone ?? null, data.mensagem ?? null, data.tipo ?? 'CONTATO']
+  )
+  return result.rows[0].id
 }
 
 export async function listLeads(tipo?: string) {
-  const request = getPool().request()
-  let where = ''
   if (tipo) {
-    request.input('tipo', sql.NVarChar(20), tipo)
-    where = 'WHERE tipo = @tipo'
+    const result = await getPool().query(
+      `SELECT id, nome, email, telefone, mensagem, tipo, respondido, criado_em
+       FROM leads
+       WHERE tipo = $1
+       ORDER BY criado_em DESC`,
+      [tipo]
+    )
+    return result.rows
   }
-  const result = await request.query(`
-    SELECT id, nome, email, telefone, mensagem, tipo, respondido, criado_em
-    FROM leads
-    ${where}
-    ORDER BY criado_em DESC
-  `)
-  return result.recordset
+
+  const result = await getPool().query(
+    `SELECT id, nome, email, telefone, mensagem, tipo, respondido, criado_em
+     FROM leads
+     ORDER BY criado_em DESC`
+  )
+  return result.rows
 }
 
 export async function markLeadRespondido(id: string, respondido: boolean) {
-  await getPool()
-    .request()
-    .input('id', sql.UniqueIdentifier, id)
-    .input('respondido', sql.Bit, respondido)
-    .query('UPDATE leads SET respondido = @respondido WHERE id = @id')
+  await getPool().query('UPDATE leads SET respondido = $1 WHERE id = $2', [respondido, id])
 }
 
 export async function dashboardTotals() {
-  const result = await getPool().request().query(`
+  const result = await getPool().query(`
     SELECT
-      COUNT(*) AS totalLeads,
-      SUM(CASE WHEN respondido = 0 THEN 1 ELSE 0 END) AS naoRespondidos
+      COUNT(*) AS "totalLeads",
+      SUM(CASE WHEN respondido = FALSE THEN 1 ELSE 0 END) AS "naoRespondidos"
     FROM leads
   `)
-  return result.recordset[0] ?? { totalLeads: 0, naoRespondidos: 0 }
+  return result.rows[0] ?? { totalLeads: 0, naoRespondidos: 0 }
 }

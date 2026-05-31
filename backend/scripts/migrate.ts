@@ -1,43 +1,35 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { connectDB, disconnectDB } from '../src/database/sqlserver.js'
+import { Pool } from 'pg'
 
 const dirname = path.dirname(fileURLToPath(import.meta.url))
 const migrationsDir = path.resolve(dirname, '../migrations')
 
-function splitBatches(script: string) {
-  return script
-    .split(/^\s*GO\s*$/gim)
-    .map((batch) => batch.trim())
-    .filter(Boolean)
-}
-
 async function main() {
-  const files = (await fs.readdir(migrationsDir)).filter((file) => file.endsWith('.sql')).sort()
-  let pool = await connectDB('master')
+  const pool = new Pool({
+    host:     process.env.DB_SERVER   ?? 'localhost',
+    port:     Number(process.env.DB_PORT ?? 5432),
+    database: process.env.DB_NAME     ?? 'triamici_db',
+    user:     process.env.DB_USER     ?? 'postgres',
+    password: process.env.DB_PASSWORD ?? '',
+  })
+
+  const files = (await fs.readdir(migrationsDir))
+    .filter(f => f.endsWith('.sql'))
+    .sort()
 
   for (const file of files) {
-    const script = await fs.readFile(path.join(migrationsDir, file), 'utf8')
+    const sql = await fs.readFile(path.join(migrationsDir, file), 'utf8')
     console.log(`Executando ${file}`)
-    for (const batch of splitBatches(script)) {
-      if (/^USE\s+triamici_db/i.test(batch)) {
-        pool = await connectDB('triamici_db')
-        continue
-      }
-
-      await pool.request().batch(batch)
-      if (/CREATE DATABASE triamici_db/i.test(batch)) {
-        pool = await connectDB('triamici_db')
-      }
-    }
+    await pool.query(sql)
   }
 
-  await disconnectDB()
+  await pool.end()
+  console.log('Migrations concluídas.')
 }
 
-main().catch(async (error) => {
-  console.error(error)
-  await disconnectDB()
+main().catch(async (err) => {
+  console.error(err)
   process.exit(1)
 })

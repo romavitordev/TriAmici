@@ -1,46 +1,35 @@
-import { getPool, sql } from '../database/sqlserver.js'
+import { getPool } from '../database/postgres.js'
 import type { GaleriaInput } from '../types/index.js'
 
 export async function listGaleria(includeInactive = false) {
-  const result = await getPool().request().query(`
+  const result = await getPool().query(`
     SELECT id, url, legenda, aluno, ativo, criado_em
     FROM galeria_fotos
-    ${includeInactive ? '' : 'WHERE ativo = 1'}
+    ${includeInactive ? '' : 'WHERE ativo = TRUE'}
     ORDER BY criado_em DESC
   `)
-  return result.recordset
+  return result.rows
 }
 
 export async function createGaleriaFoto(data: GaleriaInput) {
-  const result = await getPool()
-    .request()
-    .input('url', sql.NVarChar(500), data.url)
-    .input('legenda', sql.NVarChar(300), data.legenda ?? null)
-    .input('aluno', sql.NVarChar(200), data.aluno ?? null)
-    .input('ativo', sql.Bit, data.ativo ?? true)
-    .query(`
-      INSERT INTO galeria_fotos (url, legenda, aluno, ativo)
-      OUTPUT INSERTED.id
-      VALUES (@url, @legenda, @aluno, @ativo)
-    `)
-  return result.recordset[0].id
+  const result = await getPool().query<{ id: string }>(
+    `INSERT INTO galeria_fotos (url, legenda, aluno, ativo)
+     VALUES ($1, $2, $3, $4)
+     RETURNING id`,
+    [data.url, data.legenda ?? null, data.aluno ?? null, data.ativo ?? true]
+  )
+  return result.rows[0].id
 }
 
 export async function updateGaleriaFoto(id: string, data: GaleriaInput) {
-  await getPool()
-    .request()
-    .input('id', sql.UniqueIdentifier, id)
-    .input('url', sql.NVarChar(500), data.url)
-    .input('legenda', sql.NVarChar(300), data.legenda ?? null)
-    .input('aluno', sql.NVarChar(200), data.aluno ?? null)
-    .input('ativo', sql.Bit, data.ativo ?? true)
-    .query(`
-      UPDATE galeria_fotos
-      SET url = @url, legenda = @legenda, aluno = @aluno, ativo = @ativo
-      WHERE id = @id
-    `)
+  await getPool().query(
+    `UPDATE galeria_fotos
+     SET url = $1, legenda = $2, aluno = $3, ativo = $4
+     WHERE id = $5`,
+    [data.url, data.legenda ?? null, data.aluno ?? null, data.ativo ?? true, id]
+  )
 }
 
 export async function deleteGaleriaFoto(id: string) {
-  await getPool().request().input('id', sql.UniqueIdentifier, id).query('DELETE FROM galeria_fotos WHERE id = @id')
+  await getPool().query('DELETE FROM galeria_fotos WHERE id = $1', [id])
 }

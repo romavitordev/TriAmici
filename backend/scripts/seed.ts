@@ -1,4 +1,4 @@
-import { connectDB, disconnectDB } from '../src/database/sqlserver.js'
+import { connectDB, disconnectDB } from '../src/database/postgres.js'
 
 async function main() {
   await connectDB()
