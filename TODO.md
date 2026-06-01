@@ -181,10 +181,35 @@ Finalizar a migração completa do projeto para produção em VPS Hostinger, gar
 
 ---
 
+# FASE 14 — PRÉ-INSCRIÇÃO E PAINEL ADMIN
+
+* [x] Migration 004_create_pre_inscricoes.sql (UUID, TEXT[], CHECK status, índices)
+* [x] Schema Zod preInscricaoSchema (backend) + espelho no frontend (lib/validations.ts)
+* [x] Repository preInscricaoRepository (create/list/getById/updateStatus/export)
+* [x] Auth admin (JWT cookie HTTP-only, sem banco de usuários) — middleware/adminAuth.ts
+* [x] Instalar jsonwebtoken + cookie-parser (+ @types); cookieParser() no server.ts
+* [x] Rotas backend: /api/pre-inscricao e /api/admin/* (login/logout/me/CRUD/export CSV)
+* [x] Notificação e-mail pré-inscrição (Resend) — sendPreInscricaoNotification
+* [x] Middleware Next.js (proteção /admin/*; redireciona p/ /admin/login)
+* [x] SiteChrome: oculta Header/Footer/AudioPlayer/cursor custom em /admin (sem alterar os componentes)
+* [x] Página /aula-gratuita com copy original + vestibular + Nighthawks (next/image + remotePattern Wikipedia)
+* [x] Página /admin/login (minimalista, sem chrome)
+* [x] Painel /admin: tabela, filtros com contadores, modal de detalhes, WhatsApp pré-formatado + auto-contactado, CSV, nota/admin
+* [x] Links "Aula Gratuita" atualizados para /aula-gratuita (Hero, CtaFinal, Curso, página /curso, Header)
+* [x] .env.example + .env.production.example (ADMIN_USER, ADMIN_PASSWORD, JWT_SECRET)
+* [x] README atualizado (Painel Administrativo + Pré-inscrição + rotas + env)
+* [x] Testes: preInscricaoSchema (5 casos) — backend 13/13 passando
+* [x] Validação: backend typecheck/build/test OK; frontend typecheck/build OK (middleware + /admin + /aula-gratuita gerados)
+* [~] Rodar migration 004 + testar fluxo real (pendente: PostgreSQL acessível)
+* Nota: feature **não** replicada em layout_triamici (static export não suporta middleware nem backend)
+
+---
+
 # PENDÊNCIAS DE INFRAESTRUTURA (fora do código)
 
 * [ ] Provisionar VPS Hostinger (Ubuntu 24)
-* [ ] PostgreSQL de produção + rodar migrations/seed
+* [ ] PostgreSQL de produção + rodar migrations/seed (inclui 004_create_pre_inscricoes)
+* [ ] Definir ADMIN_USER/ADMIN_PASSWORD/JWT_SECRET no .env de produção do VPS
 * [ ] DNS do domínio triamici.com.br → VPS
 * [ ] SSL (Certbot/Let's Encrypt)
 * [ ] Validar domínio no Resend e trocar EMAIL_FROM para noreply@triamici.com.br

@@ -237,7 +237,7 @@ export function Curso() {
 
         {/* ── CTAs — centralizados após o conteúdo completo ── */}
         <div className="mt-16 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-          <Button href="/contato">Peça a aula gratuita</Button>
+          <Button href="/aula-gratuita">Peça a aula gratuita</Button>
           <Button href="/sobre" variant="outline">Saiba mais sobre o curso</Button>
         </div>
 

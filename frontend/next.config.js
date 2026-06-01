@@ -10,6 +10,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'live.staticflickr.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'upload.wikimedia.org',
+      },
     ],
   },
 }

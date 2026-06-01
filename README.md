@@ -41,7 +41,14 @@ RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
 EMAIL_DESTINO=voce@exemplo.com
 # Remetente: enquanto o dominio nao estiver validado no Resend, use o sender de testes
 EMAIL_FROM=Tri Amici Site <onboarding@resend.dev>
+# Admin (painel de pré-inscrições — autenticação por cookie JWT, sem banco de usuários)
+ADMIN_USER=triamici_admin
+ADMIN_PASSWORD=senha_forte_aqui
+JWT_SECRET=string_aleatoria_de_64_caracteres
 ```
+
+> Gere um `JWT_SECRET` seguro com:
+> `node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"`
 
 > Alternativa ao bloco `DB_*`: defina uma única `DATABASE_URL=postgres://user:pass@host:5432/db` (tem prioridade).
 > Sem `RESEND_API_KEY` o backend **sobe normalmente** — apenas não envia e-mails (registra o motivo no log).
@@ -84,6 +91,11 @@ npm run dev
 | GET    | /api/depoimentos   | Lista depoimentos ativos         |
 | GET    | /api/galeria       | Lista fotos da galeria ativas    |
 | POST   | /api/contato       | Cria lead e envia notificação    |
+| POST   | /api/pre-inscricao | Cria pré-inscrição + notifica    |
+| POST   | /api/admin/login   | Login do painel (cookie JWT)     |
+| GET    | /api/admin/pre-inscricoes        | Lista pré-inscrições (auth) |
+| PATCH  | /api/admin/pre-inscricoes/:id/status | Atualiza status (auth) |
+| GET    | /api/admin/pre-inscricoes/export/csv | Exporta CSV (auth)     |
 
 ### Payload do POST /api/contato
 ```
@@ -116,6 +128,26 @@ npm --workspace frontend run typecheck   # tsc --noEmit
 ```
 
 ---
+
+## Pré-inscrição (Aula Gratuita)
+A página pública **`/aula-gratuita`** reconstrói, com a identidade da escola, o formulário
+de admissão do Google Forms: dados pessoais, perfil fotográfico e o "vestibular" de
+sensibilidade artística (4 perguntas abertas, incluindo a leitura do quadro *Nighthawks*,
+de Edward Hopper). Cada envio cria um registro em `pre_inscricoes` e dispara um e-mail de
+notificação (Resend) para a escola. Os botões "Aula grátis / aula gratuita" do site público
+apontam para esta página (a rota `/contato` segue para contato geral).
+
+## Painel Administrativo
+- **URL:** `[domínio]/admin` — **não linkado** em nenhuma parte do site público.
+- **Acesso:** configure `ADMIN_USER`, `ADMIN_PASSWORD` e `JWT_SECRET` no `.env` do backend.
+  Autenticação por cookie HTTP-only (JWT, 24h), sem banco de usuários. As rotas `/admin/*`
+  são protegidas por middleware do Next (redireciona para `/admin/login` sem sessão).
+- **Funcionalidades:**
+  - Listar pré-inscrições e filtrar por status (Pendentes / Contactadas / Rejeitadas) com contadores.
+  - Ver detalhes completos, incluindo as 4 respostas do vestibular.
+  - "Chamar no WhatsApp" — abre `wa.me` com mensagem pré-formatada e marca como *contactado* automaticamente.
+  - Marcar status manualmente (pendente / contactado / rejeitado) e adicionar notas.
+  - Exportar todas as pré-inscrições em **CSV** (com BOM UTF-8, abre direto no Excel).
 
 ## Mídias
 Todos os arquivos de mídia ficam em `frontend/public/midias/` e são servidos em `/midias/...`.

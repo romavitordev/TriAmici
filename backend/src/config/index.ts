@@ -23,4 +23,9 @@ export const config = {
     // use o remetente de testes 'onboarding@resend.dev' (default).
     from: process.env.EMAIL_FROM ?? 'Tri Amici Site <onboarding@resend.dev>',
   },
+  admin: {
+    user:      process.env.ADMIN_USER      ?? 'admin',
+    password:  process.env.ADMIN_PASSWORD  ?? '',
+    jwtSecret: process.env.JWT_SECRET      ?? 'dev-secret-change-in-production',
+  },
 }
