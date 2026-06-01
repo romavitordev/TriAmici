@@ -1,15 +1,5 @@
 import { z } from 'zod'
 
-export const contactSchema = z.object({
-  nome: z.string().min(2, 'Informe seu nome'),
-  email: z.string().email('Informe um e-mail valido'),
-  telefone: z.string().min(8, 'Informe seu WhatsApp'),
-  mensagem: z.string().min(5, 'Conte um pouco sobre seu interesse'),
-  empresa: z.string().max(0).optional()
-})
-
-export type ContactForm = z.infer<typeof contactSchema>
-
 /* ── Pré-inscrição (espelha o schema do backend) ── */
 
 export const FAIXAS = ['18-24','25-30','31-40','41-50','51-60','61-70','71-80','81-99','99+'] as const
