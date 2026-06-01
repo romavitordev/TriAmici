@@ -41,7 +41,7 @@ const NIVEL_LABEL: Record<string, string> = {
 }
 const INTENCAO_LABEL: Record<string, string> = {
   convite_aula_zero: 'Convite Aula Zero', reservar_vaga: 'Reservar vaga',
-  receber_brochura: 'Brochura', outro: 'Outro',
+  receber_brochura: 'Brochura',
 }
 const STATUS_META: Record<Status, { label: string; cls: string }> = {
   pendente:   { label: 'Pendente',   cls: 'bg-amber-500/15 text-amber-300 border-amber-500/30' },

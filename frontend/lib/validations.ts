@@ -18,7 +18,7 @@ export const NIVEIS = [
   'nao_fotografo','celular','odeia_tecnologia','facilidade_tech',
   'cameras_compactas','dslr','fotografo_familia','cobrou_servicos'
 ] as const
-export const INTENCOES = ['convite_aula_zero','reservar_vaga','receber_brochura','outro'] as const
+export const INTENCOES = ['convite_aula_zero','reservar_vaga','receber_brochura'] as const
 
 export const preInscricaoSchema = z.object({
   nome:           z.string().min(3, 'Informe seu nome completo').max(200),

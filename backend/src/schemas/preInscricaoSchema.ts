@@ -7,7 +7,7 @@ const NIVEIS = [
   'cameras_compactas','dslr','fotografo_familia','cobrou_servicos'
 ] as const
 const INTENCOES = [
-  'convite_aula_zero','reservar_vaga','receber_brochura','outro'
+  'convite_aula_zero','reservar_vaga','receber_brochura'
 ] as const
 
 export const preInscricaoSchema = z.object({

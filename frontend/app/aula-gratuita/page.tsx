@@ -42,7 +42,6 @@ const INTENCOES: { value: string; label: string }[] = [
   { value: 'convite_aula_zero', label: 'Receber convite para a Aula Zero (gratuita)' },
   { value: 'reservar_vaga',     label: 'Reservar minha vaga para a próxima turma' },
   { value: 'receber_brochura',  label: 'Receber a brochura oficial do curso' },
-  { value: 'outro',             label: 'Outro' },
 ]
 
 const NIGHTHAWKS =
