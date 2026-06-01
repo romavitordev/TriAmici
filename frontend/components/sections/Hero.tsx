@@ -161,7 +161,7 @@ export function Hero() {
           Sorocaba · SP · Desde 2000
         </p>
 
-        <h1 className="font-serif text-[clamp(2.1rem,8.5vw,2.75rem)] leading-[1.05] md:text-8xl">
+        <h1 className="font-serif text-[clamp(2.5rem,10vw,3.5rem)] leading-[1.02] md:text-8xl">
           <span ref={titleRef} className="block will-change-[transform,opacity]">
             Fotografia que muda
           </span>

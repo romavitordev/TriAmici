@@ -1,10 +1,10 @@
 import { AnimatedCounter } from '@/components/ui/AnimatedCounter'
 
 const stats = [
-  { value: 25,   suffix: '+',  label: 'Anos de história' },
+  { value: 25,   suffix: '+',  label: 'Anos de ofício' },
   { value: 1600, suffix: '+',  label: 'Fotos de alunos publicadas' },
-  { value: 0,    suffix: '',   label: 'Experiência anterior exigida' },
-  { value: 100,  suffix: '%',  label: 'Profissionalizante' }
+  { value: 6,    suffix: '',   label: 'Módulos em 1 semestre' },
+  { value: 100,  suffix: '%',  label: 'Presencial e prático' }
 ]
 
 export function Stats() {

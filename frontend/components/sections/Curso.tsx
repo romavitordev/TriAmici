@@ -89,8 +89,8 @@ export function Curso() {
           <div className="flex flex-col gap-8">
             <div className="space-y-5">
               <p className="section-kicker">O curso</p>
-              <h2 className="font-serif text-4xl leading-[1.1] text-white sm:text-5xl xl:text-6xl">
-                Um curso profissional,<br className="hidden sm:block" /> divertido e relevante.
+              <h2 className="max-w-[20ch] text-balance font-serif text-4xl leading-[1.08] text-white sm:text-5xl xl:text-6xl">
+                Um curso profissional, <span className="italic text-dourado/95">divertido e relevante.</span>
               </h2>
               <p className="max-w-lg text-base leading-8 text-cinza">
                 Há 25 anos com o currículo mais profundo, abrangente e exigente da região —
@@ -107,8 +107,8 @@ export function Curso() {
                 <div>
                   <p className="text-sm font-medium text-white">Método próprio</p>
                   <p className="mt-1.5 text-sm leading-6 text-white/45">
-                    Um conselho de fotógrafos experientes construiu um processo pensado
-                    para quem quer produzir imagens que impactam.
+                    Construído ao longo de 25 anos pelos três fundadores e refinado pelo
+                    professor titular — pensado para quem quer produzir imagens que impactam.
                   </p>
                 </div>
               </div>
@@ -188,8 +188,8 @@ export function Curso() {
           <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-10 md:mb-14">
             <div>
               <p className="section-kicker">O que você aprende</p>
-              <h3 className="mt-3 font-serif text-3xl leading-tight text-white md:text-4xl">
-                18 tópicos essenciais.
+              <h3 className="mt-3 max-w-[18ch] text-balance font-serif text-3xl leading-[1.08] text-white md:text-4xl">
+                Em 6 módulos, <span className="italic text-dourado/95">três frentes essenciais.</span>
               </h3>
             </div>
             <p className="max-w-xs text-sm leading-7 text-white/40 md:text-right">

@@ -73,8 +73,8 @@ export function Depoimentos() {
     <section className="bg-[#151515] py-24">
       <div className="container-page">
         <p className="section-kicker">Depoimentos</p>
-        <h2 className="mt-4 font-serif text-4xl md:text-6xl">
-          Quem passa por aqui muda o jeito de ver.
+        <h2 className="mt-4 max-w-[20ch] text-balance font-serif text-4xl leading-[1.08] md:text-5xl">
+          Quem passa por aqui <span className="italic text-dourado/95">muda o jeito de ver.</span>
         </h2>
       </div>
 
@@ -97,7 +97,7 @@ export function Depoimentos() {
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} className="w-[76vw] max-w-sm sm:w-auto sm:max-w-xl">
-            <article className="accent-card border border-dourado/25 bg-preto p-5 sm:p-8">
+            <article className="accent-card relative border border-dourado/25 bg-preto p-5 sm:p-8">
               <div className="flex items-center gap-4">
                 {item.foto && (
                   <Image

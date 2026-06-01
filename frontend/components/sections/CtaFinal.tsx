@@ -16,11 +16,12 @@ export function CtaFinal() {
 
       <div className="container-page relative z-10 flex min-h-[65vh] flex-col items-center justify-center py-24 pb-24 text-center md:items-start md:text-left">
         <p className="section-kicker">Aula gratuita</p>
-        <h2 className="mt-5 max-w-2xl font-serif text-4xl leading-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-          Venha conhecer a escola numa aula gratuita.
+        <h2 className="mt-5 max-w-[20ch] text-balance font-serif text-[clamp(2.25rem,5vw,4.5rem)] leading-[1.05] text-white">
+          Venha conhecer a escola numa <span className="italic text-dourado/95">aula gratuita.</span>
         </h2>
-        <p className="mt-5 max-w-md text-base leading-7 text-white/55">
-          Sem compromisso. Traga sua câmera ou venha só com curiosidade.
+        <p className="mt-5 max-w-md text-balance text-base leading-7 text-white/65">
+          Sem compromisso. Traga sua câmera ou só a curiosidade — a gente apresenta o método e
+          a casa pra você decidir com calma.
         </p>
         <div className="mt-9">
           <Button href="/aula-gratuita">Peça seu convite agora</Button>
