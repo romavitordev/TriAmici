@@ -111,6 +111,29 @@ tipo aceita "CONTATO" ou "AULA_GRATIS".
 
 ---
 
+## Conteúdo gerenciado fora do painel
+
+Por decisão de produto, **depoimentos e galeria de fotos** NÃO são editáveis pelo
+painel admin. São gerenciados manualmente pelo responsável técnico (parte do plano
+mensal de manutenção/conteúdo).
+
+### Como atualizar depoimentos
+1. Edite `backend/migrations/002_seed_depoimentos.sql` com os novos textos/fotos/turmas.
+2. Em produção, aplique direto no banco — uma forma simples:
+   ```bash
+   # ATENÇÃO: substitui todos os depoimentos atuais
+   psql "$DATABASE_URL" -c "DELETE FROM depoimentos;"
+   psql "$DATABASE_URL" -f backend/migrations/002_seed_depoimentos.sql
+   ```
+3. O frontend atualiza na próxima visita (cache `no-store`).
+
+### Como atualizar galeria
+Mesmo fluxo, em `backend/migrations/003_seed_galeria.sql`.
+
+> Painel admin é exclusivo para **pré-inscrições** (Aula Zero/admissão).
+
+---
+
 ## Qualidade e testes
 Scripts de validação (a partir da raiz do projeto):
 ```bash
