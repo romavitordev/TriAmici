@@ -15,7 +15,7 @@ export default function ContatoPage() {
     const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:3001'}/api/contato`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ ...data, tipo: 'AULA_GRATIS' })
+      body: JSON.stringify({ ...data, tipo: 'CONTATO' }) // contato geral (aula gratuita usa /aula-gratuita)
     })
     if (!response.ok) throw new Error('Erro ao enviar')
     setSent(true)
@@ -26,11 +26,25 @@ export default function ContatoPage() {
       <div className="container-page grid gap-12 lg:grid-cols-[1.1fr_0.9fr]">
         <div>
           <p className="section-kicker">Contato</p>
-          <h1 className="mt-4 font-serif text-4xl leading-tight md:text-5xl lg:text-7xl">Peca seu convite para a aula gratuita.</h1>
+          <h1 className="mt-4 font-serif text-4xl leading-tight md:text-5xl lg:text-7xl">Fale com a gente.</h1>
+          <p className="mt-5 max-w-md text-base leading-7 text-cinza">
+            Dúvidas sobre o curso, horários, valores ou parcerias? Mande sua mensagem — respondemos por e-mail ou WhatsApp.
+          </p>
+
+          <div className="mt-6 max-w-md rounded-xl border border-dourado/25 bg-dourado/[0.06] p-5">
+            <p className="text-sm leading-6 text-branco/85">
+              Quer garantir sua <strong className="text-dourado">aula experimental gratuita</strong>?
+              A pré-inscrição é o caminho — rápida e sem compromisso.
+            </p>
+            <div className="mt-4">
+              <Button href="/aula-gratuita">Quero a aula gratuita</Button>
+            </div>
+          </div>
+
           {sent ? (
             <div className="mt-12 border border-dourado/40 bg-escuro p-8">
               <h2 className="font-serif text-4xl text-dourado">Mensagem enviada.</h2>
-              <p className="mt-4 text-cinza">Entraremos em contato para combinar sua visita.</p>
+              <p className="mt-4 text-cinza">Recebemos seu contato e responderemos em breve.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit(onSubmit)} className="mt-12 grid gap-6">
@@ -51,7 +65,7 @@ export default function ContatoPage() {
                 <textarea {...register('mensagem')} rows={5} className="border-b border-borda bg-transparent py-4 text-base normal-case tracking-normal text-branco outline-none transition focus:border-dourado" />
                 {errors.mensagem && <span className="text-xs normal-case tracking-normal text-red-400">{errors.mensagem.message}</span>}
               </label>
-              <Button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Enviando' : 'Enviar mensagem'}</Button>
+              <Button type="submit" disabled={isSubmitting}>{isSubmitting ? 'Enviando...' : 'Enviar mensagem'}</Button>
             </form>
           )}
         </div>
