@@ -126,15 +126,13 @@ export function Depoimentos() {
         grabCursor
         centeredSlides
         slidesPerView="auto"
-        loop={items.length >= 5}
-        loopAdditionalSlides={items.length}
-        watchSlidesProgress
+        loop
         autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
         coverflowEffect={{ rotate: 0, stretch: 0, depth: 140, modifier: 1.2, slideShadows: false }}
       >
         {items.map((item) => (
           <SwiperSlide key={item.id} className="w-[76vw] max-w-sm sm:w-auto sm:max-w-xl">
-            <article className="accent-card relative border border-dourado/25 bg-preto p-5 sm:p-8">
+            <article className="accent-card border border-dourado/25 bg-preto p-5 sm:p-8">
               <div className="flex items-center gap-4">
                 {item.foto && (
                   <Image
