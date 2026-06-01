@@ -50,8 +50,8 @@ export async function updateStatus(
 ) {
   await getPool().query(
     `UPDATE pre_inscricoes
-     SET status = $1,
-         contactado_em = CASE WHEN $1 = 'contactado' THEN NOW() ELSE contactado_em END,
+     SET status = $1::text,
+         contactado_em = CASE WHEN $1::text = 'contactado' THEN NOW() ELSE contactado_em END,
          nota_admin = COALESCE($2, nota_admin)
      WHERE id = $3`,
     [status, nota_admin ?? null, id]
