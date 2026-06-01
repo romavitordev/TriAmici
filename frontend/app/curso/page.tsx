@@ -51,28 +51,28 @@ const pilares = [
 ]
 
 const logistica: { Icon: typeof Clock; label: string; value: string }[] = [
-  { Icon: Clock,    label: 'Duração',       value: '1 semestre (6 meses)' },
-  { Icon: Calendar, label: 'Encontros',     value: '2× por semana · noite' },
+  { Icon: Clock,    label: 'Duração',       value: '1 semestre · 6 meses' },
+  { Icon: Calendar, label: 'Encontros',     value: '1× por semana, à noite' },
   { Icon: MapPin,   label: 'Formato',       value: 'Presencial · Sorocaba/SP' },
-  { Icon: Users,    label: 'Vagas/turma',   value: 'Padrão até 12 · VIP intimista' },
+  { Icon: Users,    label: 'Vagas',         value: 'Padrão até 12 · VIP intimista' },
   { Icon: Award,    label: 'Certificado',   value: 'Incluso' },
-  { Icon: Sparkles, label: 'Material',      value: 'Apostila + e-book' },
+  { Icon: Sparkles, label: 'Material',      value: 'Apostila e e-book' },
 ]
 
 // FAQ
 const faq: { q: string; a: string }[] = [
   { q: 'Preciso ter câmera própria?',
-    a: 'Não para começar. Recomendamos uma DSLR ou mirrorless para tirar o máximo do curso, mas a escola tem equipamento de estúdio e orientamos a melhor compra conforme seu objetivo e orçamento.' },
+    a: 'Sim — você vai usar a sua câmera nas aulas, é parte essencial da prática. Não precisa ser de última geração: uma DSLR ou mirrorless de entrada já é suficiente para começar. Se ainda não tem, orientamos a melhor compra conforme seu objetivo e orçamento antes da matrícula.' },
   { q: 'Atende quem nunca pegou uma câmera?',
     a: 'Sim — a Fase 1 (Fundação) começa do zero absoluto. A maior parte dos alunos chega assim e termina cobrando pelos próprios trabalhos.' },
-  { q: 'Quais dias da semana são as aulas?',
-    a: 'O dia é definido a cada semestre, na formação da turma, pelo professor — em conjunto com os alunos matriculados. Pode ser, por exemplo, terças e quintas em um semestre, e segundas e quartas no seguinte. Os encontros são sempre à noite, 2× por semana.' },
+  { q: 'Qual o dia da semana das aulas?',
+    a: 'O dia é definido a cada semestre, na formação da turma, pelo professor — em conjunto com os alunos matriculados. Pode ser, por exemplo, terça-feira em um semestre, e quinta-feira no seguinte. Os encontros são sempre à noite, 1× por semana.' },
   { q: 'Qual a diferença entre a turma Padrão e a turma VIP?',
     a: 'A turma Padrão tem até 12 alunos e segue o cronograma da escola. A turma VIP é intimista, com poucos alunos — mais atenção individual, mais tempo de estúdio para cada um e flexibilidade maior no calendário. Mesmos 6 módulos e mesma certificação.' },
   { q: 'Quando começa a próxima turma?',
     a: 'As vagas abrem por semestre. Para receber o aviso assim que abrirem (e antes da divulgação geral), deixe seu nome em "Notifique-me" no card de turmas acima.' },
   { q: 'Quanto tempo dura?',
-    a: 'Um semestre — 6 meses, com encontros 2× por semana. Carga horária total e cronograma são entregues com a brochura.' },
+    a: 'Um semestre — 6 meses, com um encontro semanal à noite. Carga horária total e cronograma são entregues com a brochura.' },
   { q: 'O curso tem certificado?',
     a: 'Sim. Certificado de conclusão Tri Amici Photography Academy ao final dos 6 módulos, válido para as duas modalidades (Padrão e VIP).' },
   { q: 'Qual é o investimento?',
@@ -356,7 +356,8 @@ export default function CursoPage() {
                 {[
                   'Procura um curso 100% online ou em vídeo (o nosso é presencial).',
                   'Quer aprender só edição/Lightroom sem técnica de câmera.',
-                  'Não tem disponibilidade para aulas práticas em estúdio.',
+                  'Não pretende ter uma câmera DSLR ou mirrorless para usar nas aulas.',
+                  'Não tem disponibilidade para um encontro semanal noturno em Sorocaba.',
                   'Espera virar profissional em duas semanas — aqui leva 6 meses.',
                 ].map((item) => (
                   <li key={item} className="flex items-start gap-3">
@@ -406,7 +407,7 @@ export default function CursoPage() {
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
-                    <span>Encontros 2× por semana, à noite</span>
+                    <span>Encontros 1× por semana, à noite</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
@@ -488,7 +489,7 @@ export default function CursoPage() {
                   Inscrições por semestre — calendário a confirmar.
                 </p>
                 <p className="mt-1 text-sm text-cinza">
-                  Dias da semana definidos na formação da turma.
+                  O dia da semana é definido na formação da turma.
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-3">
@@ -526,16 +527,18 @@ export default function CursoPage() {
                       <div className="icon-spring mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-dourado/25 bg-dourado/10 text-dourado">
                         <Icon className="h-4 w-4" />
                       </div>
-                      <div>
+                      <div className="min-w-0">
                         <p className="text-[0.65rem] uppercase tracking-[0.22em] text-cinza">{label}</p>
-                        <p className="mt-1 font-serif text-lg text-branco">{value}</p>
+                        <p className="mt-1 max-w-[14ch] text-balance font-serif text-base leading-tight text-branco md:text-lg">
+                          {value}
+                        </p>
                       </div>
                     </li>
                   ))}
                 </ul>
                 <p className="mt-4 text-xs leading-6 text-cinza/65">
-                  Os dias da semana são definidos a cada semestre na formação da turma, em
-                  conjunto com os alunos matriculados. Encontros sempre à noite.
+                  O dia da semana é definido a cada semestre na formação da turma, em conjunto
+                  com os alunos matriculados. Encontros sempre à noite.
                 </p>
               </div>
             </ScrollReveal>
