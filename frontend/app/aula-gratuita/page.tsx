@@ -39,10 +39,10 @@ const NIVEIS: { value: string; label: string }[] = [
 ]
 
 const INTENCOES: { value: string; label: string }[] = [
-  { value: 'convite_aula_zero', label: 'Receber convite especial para a Aula Zero (gratuita)' },
-  { value: 'reservar_vaga',     label: 'Reservar minha vaga para a próxima turma (entrar em contato imediato pelo Whatsapp: 15 98112 7508)' },
-  { value: 'receber_brochura',  label: 'Receber a brochura oficial do programa de admissão, com as informações do curso (se ainda não recebeu)' },
-  { value: 'outro',             label: 'Outro:' },
+  { value: 'convite_aula_zero', label: 'Receber convite para a Aula Zero (gratuita)' },
+  { value: 'reservar_vaga',     label: 'Reservar minha vaga para a próxima turma' },
+  { value: 'receber_brochura',  label: 'Receber a brochura oficial do curso' },
+  { value: 'outro',             label: 'Outro' },
 ]
 
 const NIGHTHAWKS =
