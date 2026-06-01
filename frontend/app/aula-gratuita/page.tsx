@@ -21,20 +21,20 @@ const FAIXAS: { value: string; label: string }[] = [
 ]
 
 const OBJETIVOS: { value: string; label: string }[] = [
-  { value: 'profissao_principal', label: 'Viver de fotografia como profissão principal' },
+  { value: 'profissao_principal', label: 'Viver de fotografia — fazer dela minha profissão principal' },
   { value: 'renda_complementar',  label: 'Complementar a minha renda com fotografia' },
-  { value: 'hobby_serio',         label: 'Praticar como hobby sério e apaixonado' },
+  { value: 'hobby_serio',         label: 'Praticar como um hobby sério e apaixonado' },
 ]
 
 const NIVEIS: { value: string; label: string }[] = [
   { value: 'nao_fotografo',    label: 'Ainda não me considero fotógrafo(a)' },
-  { value: 'celular',          label: 'Fotografo com o celular' },
-  { value: 'odeia_tecnologia', label: 'Tenho dificuldade / não gosto de tecnologia' },
-  { value: 'facilidade_tech',  label: 'Tenho facilidade com tecnologia' },
+  { value: 'celular',          label: 'Fotografo principalmente com o celular' },
+  { value: 'odeia_tecnologia', label: 'Tenho dificuldade (ou pouca paciência) com tecnologia' },
+  { value: 'facilidade_tech',  label: 'Tenho facilidade com tecnologia e equipamentos' },
   { value: 'cameras_compactas',label: 'Já usei câmeras compactas / automáticas' },
-  { value: 'dslr',             label: 'Já uso câmera DSLR / mirrorless' },
-  { value: 'fotografo_familia',label: 'Fotografo minha família e amigos' },
-  { value: 'cobrou_servicos',  label: 'Já cobrei por algum trabalho de fotografia' },
+  { value: 'dslr',             label: 'Já fotografo com câmera DSLR ou mirrorless' },
+  { value: 'fotografo_familia',label: 'Costumo fotografar minha família e amigos' },
+  { value: 'cobrou_servicos',  label: 'Já cobrei por algum trabalho fotográfico' },
 ]
 
 const INTENCOES: { value: string; label: string }[] = [
@@ -100,26 +100,35 @@ export default function AulaGratuitaPage() {
     <section className="bg-preto px-4 pb-24 pt-28 md:pt-36">
       <div className="container-page max-w-3xl">
 
-        {/* ── COPY DE VENDAS (preservada) ── */}
+        {/* ── COPY DE VENDAS ── */}
         <p className="section-kicker">Programa de admissão</p>
         <h1 className="mt-4 font-serif text-4xl leading-[1.1] text-branco md:text-6xl">
           A primeira etapa para se tornar um fotógrafo de verdade.
         </h1>
         <div className="mt-8 space-y-5 text-lg leading-8 text-cinza">
           <p>
-            Esta não é uma simples inscrição. É o início de uma conversa séria sobre o seu
-            futuro na fotografia. Aqui na Tri Amici, em Sorocaba, há 25 anos formamos
-            fotógrafos com método prático, olhar artístico e visão de mercado.
+            Seja muito bem-vindo(a). Antes de tudo, queremos ser honestos com você: esta não é
+            uma inscrição comum. É o início de uma conversa séria sobre o seu futuro na
+            fotografia. Há 25 anos, aqui em Sorocaba, a Tri Amici forma fotógrafos de verdade —
+            com método prático, olhar artístico e visão de mercado. Gente que entrou sem saber
+            segurar uma câmera e saiu criando imagens que emocionam, vendem e transformam.
           </p>
           <p>
-            Antes de abrir uma vaga, queremos te conhecer de verdade — sua história, seu olhar
-            e o que move você a criar imagens. Por isso, este formulário tem duas partes: uma de
-            dados e outra que chamamos, com carinho, de o nosso pequeno “vestibular” de
-            sensibilidade. Não existem respostas certas ou erradas. Existe a sua verdade.
+            Mas a gente não abre vaga para qualquer um. Não por arrogância — por respeito.
+            Respeito ao seu tempo, ao seu dinheiro e, principalmente, ao seu talento. Por isso,
+            antes de falar sobre turmas e valores, queremos te conhecer de verdade: quem você é,
+            o que já viveu com a fotografia e, sobretudo, como você enxerga o mundo.
+          </p>
+          <p>
+            Este formulário tem duas partes. A primeira é simples: seus dados e o seu momento
+            atual. A segunda é o que chamamos, com todo o carinho, de o nosso pequeno
+            “vestibular” de sensibilidade. Calma — não existe resposta certa nem errada, e a
+            gente não está aqui para te reprovar. Estamos aqui para enxergar o seu olhar.
           </p>
           <p className="text-branco/80">
-            Reserve alguns minutos, responda com sinceridade e capriche — é assim que a gente
-            começa a te enxergar como o próximo fotógrafo profissional formado pela escola.
+            Então respire, reserve alguns minutos e responda com sinceridade. Capriche. É
+            exatamente assim, lendo as suas palavras, que a gente começa a imaginar você como o
+            próximo fotógrafo profissional formado pela Tri Amici.
           </p>
         </div>
 
