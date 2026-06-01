@@ -20,7 +20,7 @@ export function Recursos({
       <div className="container-page">
         <ScrollReveal>
           <p className="section-kicker">Materiais</p>
-          <h2 className="mt-4 max-w-2xl font-serif text-4xl md:text-5xl">
+          <h2 className="mt-4 max-w-[24ch] text-balance font-serif text-4xl leading-[1.08] md:text-5xl">
             {titulo}
           </h2>
           <p className="mt-5 max-w-xl text-base leading-8 text-cinza">

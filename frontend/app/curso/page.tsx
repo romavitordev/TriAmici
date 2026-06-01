@@ -212,8 +212,8 @@ export default function CursoPage() {
         <div className="container-page">
           <ScrollReveal>
             <p className="section-kicker">Grade curricular</p>
-            <h2 className="mt-4 max-w-2xl font-serif text-4xl md:text-5xl">
-              6 módulos em 3 fases — do olhar ao mercado.
+            <h2 className="mt-4 max-w-[22ch] text-balance font-serif text-4xl leading-[1.08] md:text-5xl">
+              6 módulos em 3 fases — <span className="italic text-dourado/95">do olhar ao mercado.</span>
             </h2>
             <p className="mt-5 max-w-xl text-base leading-8 text-cinza">
               Cada fase tem um objetivo claro e leva você a um patamar concreto antes da próxima.
@@ -260,8 +260,8 @@ export default function CursoPage() {
         <div className="container-page">
           <ScrollReveal>
             <p className="section-kicker">O método</p>
-            <h2 className="mt-4 max-w-2xl font-serif text-4xl md:text-5xl">
-              Três pilares que transformam olhar em ofício.
+            <h2 className="mt-4 max-w-[22ch] text-balance font-serif text-4xl leading-[1.08] md:text-5xl">
+              Três pilares que transformam <span className="italic text-dourado/95">olhar em ofício.</span>
             </h2>
           </ScrollReveal>
           <div className="mt-14 grid border border-borda md:grid-cols-3">
@@ -299,7 +299,7 @@ export default function CursoPage() {
             <ScrollReveal delay={0.05}>
               <div className="relative border-l border-dourado pl-8 md:pr-14">
                 <p className="section-kicker">Hobby</p>
-                <h3 className="mt-4 font-serif text-3xl leading-snug md:text-4xl">
+                <h3 className="mt-4 max-w-[18ch] text-balance font-serif text-3xl leading-[1.1] md:text-4xl">
                   Fotografar melhor a própria vida.
                 </h3>
                 <p className="mt-5 leading-7 text-cinza">
@@ -323,7 +323,7 @@ export default function CursoPage() {
             <ScrollReveal delay={0.1}>
               <div className="relative border-l border-dourado/30 pl-8">
                 <p className="section-kicker">Profissão</p>
-                <h3 className="mt-4 font-serif text-3xl leading-snug md:text-4xl">
+                <h3 className="mt-4 max-w-[18ch] text-balance font-serif text-3xl leading-[1.1] md:text-4xl">
                   Cobrar pelo seu olhar.
                 </h3>
                 <p className="mt-5 leading-7 text-cinza">
