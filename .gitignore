@@ -13,3 +13,6 @@ frontend/.next
 # Logs / PM2
 *.log
 .pm2
+
+# Helper de DB local efêmero (dev)
+backend/_devdb.mjs
