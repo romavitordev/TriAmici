@@ -21,12 +21,18 @@ export function Galeria() {
 
   useEffect(() => {
     apiFetch<Foto[]>('/api/galeria').then(setFotos).catch(() => undefined)
+  }, [])
+
+  // (Re)observa as fotos sempre que a lista muda (ex.: após carregar da API).
+  // Sem isso, o fetch troca os nós do DOM e os novos ficam sem `is-visible`,
+  // deixando o overlay de reveal cobrindo as imagens (galeria "sem fotos").
+  useEffect(() => {
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('is-visible'))
     }, { threshold: 0.2 })
     document.querySelectorAll('.reveal-photo').forEach((node) => observer.observe(node))
     return () => observer.disconnect()
-  }, [])
+  }, [fotos])
 
   return (
     <section className="bg-preto py-24 md:py-32">
