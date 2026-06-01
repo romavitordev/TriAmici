@@ -91,7 +91,9 @@ export function Depoimentos() {
         grabCursor
         centeredSlides
         slidesPerView="auto"
-        loop
+        loop={items.length >= 5}
+        loopAdditionalSlides={items.length}
+        watchSlidesProgress
         autoplay={{ delay: 4500, disableOnInteraction: false, pauseOnMouseEnter: true }}
         coverflowEffect={{ rotate: 0, stretch: 0, depth: 140, modifier: 1.2, slideShadows: false }}
       >
