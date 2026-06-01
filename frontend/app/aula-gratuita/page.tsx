@@ -9,32 +9,32 @@ import { postPreInscricao } from '@/lib/api'
 import { preInscricaoSchema, type PreInscricaoForm } from '@/lib/validations'
 
 const FAIXAS: { value: string; label: string }[] = [
-  { value: '18-24', label: '18 a 24' },
-  { value: '25-30', label: '25 a 30' },
-  { value: '31-40', label: '31 a 40' },
-  { value: '41-50', label: '41 a 50' },
-  { value: '51-60', label: '51 a 60' },
-  { value: '61-70', label: '61 a 70' },
-  { value: '71-80', label: '71 a 80' },
-  { value: '81-99', label: '81 a 99' },
+  { value: '18-24', label: '18-24 anos' },
+  { value: '25-30', label: '25-30 anos' },
+  { value: '31-40', label: '31-40 anos' },
+  { value: '41-50', label: '41-50 anos' },
+  { value: '51-60', label: '51-60 anos' },
+  { value: '61-70', label: '61-70 anos' },
+  { value: '71-80', label: '71-80 anos' },
+  { value: '81-99', label: '81-99 anos' },
   { value: '99+',   label: '99 ou mais?? (se ainda estiver criando imagens aos 100, será nossa inspiração)' },
 ]
 
 const OBJETIVOS: { value: string; label: string }[] = [
-  { value: 'profissao_principal', label: 'Viver de fotografia — fazer dela minha profissão principal' },
-  { value: 'renda_complementar',  label: 'Complementar a minha renda com fotografia' },
-  { value: 'hobby_serio',         label: 'Praticar como um hobby sério e apaixonado' },
+  { value: 'profissao_principal', label: 'Trabalhar com algo que amo e viver de fotografia como minha profissão principal.' },
+  { value: 'renda_complementar',  label: 'Trabalhar com fotografia e complementar minha renda sem abandonar minha atividade atual.' },
+  { value: 'hobby_serio',         label: 'Aprofundar-me na arte da fotografia como hobby sério e apaixonado.' },
 ]
 
 const NIVEIS: { value: string; label: string }[] = [
-  { value: 'nao_fotografo',    label: 'Ainda não me considero fotógrafo(a)' },
-  { value: 'celular',          label: 'Fotografo principalmente com o celular' },
-  { value: 'odeia_tecnologia', label: 'Tenho dificuldade (ou pouca paciência) com tecnologia' },
-  { value: 'facilidade_tech',  label: 'Tenho facilidade com tecnologia e equipamentos' },
-  { value: 'cameras_compactas',label: 'Já usei câmeras compactas / automáticas' },
-  { value: 'dslr',             label: 'Já fotografo com câmera DSLR ou mirrorless' },
-  { value: 'fotografo_familia',label: 'Costumo fotografar minha família e amigos' },
-  { value: 'cobrou_servicos',  label: 'Já cobrei por algum trabalho fotográfico' },
+  { value: 'nao_fotografo',    label: 'Não costumo fotografar (mas sinto que posso aprender).' },
+  { value: 'celular',          label: 'Fotografo bastante com o celular.' },
+  { value: 'odeia_tecnologia', label: 'Odeio computadores e tecnologia muito avançada (mas estou disposto a superar isso se for necessário).' },
+  { value: 'facilidade_tech',  label: 'Tenho facilidade com computadores, internet, arquivos...' },
+  { value: 'cameras_compactas',label: 'Já fotografo com câmeras compactas. E gosto muito.' },
+  { value: 'dslr',             label: 'Já fotografo com câmeras DSLR profissionais.' },
+  { value: 'fotografo_familia',label: 'Sou eu quem fotografa a família em todos os eventos.' },
+  { value: 'cobrou_servicos',  label: 'Já cobrei por serviços de fotografia.' },
 ]
 
 const INTENCOES: { value: string; label: string }[] = [
@@ -100,37 +100,47 @@ export default function AulaGratuitaPage() {
     <section className="bg-preto px-4 pb-24 pt-28 md:pt-36">
       <div className="container-page max-w-3xl">
 
-        {/* ── COPY DE VENDAS ── */}
+        {/* ── COPY DE VENDAS (texto original do dono) ── */}
         <p className="section-kicker">Programa de admissão</p>
-        <h1 className="mt-4 font-serif text-4xl leading-[1.1] text-branco md:text-6xl">
-          A primeira etapa para se tornar um fotógrafo de verdade.
+        <h1 className="mt-4 font-serif text-4xl leading-[1.12] text-branco md:text-5xl">
+          O primeiro passo para viver seu sonho de fotografia com arte, paixão e profissionalismo
         </h1>
         <div className="mt-8 space-y-5 text-lg leading-8 text-cinza">
+          <p>Se você está lendo isto, existe algo dentro de você que não quer apenas tirar fotos.</p>
+
+          <div className="space-y-1.5 border-l-2 border-dourado/40 pl-5 font-serif text-xl italic text-branco/90">
+            <p>Quer contar histórias.</p>
+            <p>Quer ser reconhecido.</p>
+            <p>Quer transformar talento em profissão.</p>
+            <p>Quer sentir orgulho quando disser: “Eu sou fotógrafa!” ou “Eu sou fotógrafo!”</p>
+          </div>
+
           <p>
-            Seja muito bem-vindo(a). Antes de tudo, queremos ser honestos com você: esta não é
-            uma inscrição comum. É o início de uma conversa séria sobre o seu futuro na
-            fotografia. Há 25 anos, aqui em Sorocaba, a Tri Amici forma fotógrafos de verdade —
-            com método prático, olhar artístico e visão de mercado. Gente que entrou sem saber
-            segurar uma câmera e saiu criando imagens que emocionam, vendem e transformam.
+            Nós também não gostamos de formulários. Gostamos de luz perfeita, enquadramento
+            preciso, risadas em sala de aula e alunos que descobrem que são capazes de muito
+            mais do que imaginavam.
           </p>
           <p>
-            Mas a gente não abre vaga para qualquer um. Não por arrogância — por respeito.
-            Respeito ao seu tempo, ao seu dinheiro e, principalmente, ao seu talento. Por isso,
-            antes de falar sobre turmas e valores, queremos te conhecer de verdade: quem você é,
-            o que já viveu com a fotografia e, sobretudo, como você enxerga o mundo.
+            Mas este pequeno passo garante sua segurança, sua organização e o cuidado individual
+            que dedicamos a cada futuro profissional que entra na escola.
           </p>
           <p>
-            Este formulário tem duas partes. A primeira é simples: seus dados e o seu momento
-            atual. A segunda é o que chamamos, com todo o carinho, de o nosso pequeno
-            “vestibular” de sensibilidade. Calma — não existe resposta certa nem errada, e a
-            gente não está aqui para te reprovar. Estamos aqui para enxergar o seu olhar.
+            Preencha com atenção. Em breve, você poderá receber o convite para sua primeira aula
+            gratuita — uma experiência real, prática e inspiradora, onde você entenderá como é
+            aprender fotografia com técnica sólida, direção artística, mercado profissional e
+            muito bom humor.
           </p>
-          <p className="text-branco/80">
-            Então respire, reserve alguns minutos e responda com sinceridade. Capriche. É
-            exatamente assim, lendo as suas palavras, que a gente começa a imaginar você como o
-            próximo fotógrafo profissional formado pela Tri Amici.
-          </p>
+          <div className="py-1">
+            <p className="font-serif text-2xl text-dourado">Este cadastro não gera compromisso financeiro.</p>
+            <p className="font-serif text-2xl text-dourado">Ele gera oportunidade.</p>
+          </div>
         </div>
+
+        <p className="mt-6 text-xs leading-6 text-cinza/70">
+          Ao solicitar seu convite, você concorda com o tratamento básico dos seus dados pessoais
+          (não solicitamos dados sensíveis), utilizados exclusivamente para seu ingresso e
+          comunicação com a escola (Lei Geral de Proteção de Dados).
+        </p>
 
         <form onSubmit={handleSubmit(onSubmit)} className="mt-14 space-y-12">
 
@@ -233,7 +243,11 @@ export default function AulaGratuitaPage() {
             {/* Nível (checkbox) */}
             <fieldset>
               <legend className={labelCls}>Qual o seu nível atual? *</legend>
-              <p className={hintCls}>Marque todas as opções que combinam com você hoje. Seja honesto(a) — partir do zero também é um ótimo começo.</p>
+              <p className={hintCls}>
+                Este curso é para quem ama fotografia e deseja tornar-se profissional — esteja
+                começando do zero, sem nenhum conhecimento prévio, ou já atuando.
+              </p>
+              <p className="mt-1 text-xs text-cinza">Clique em todas que julgar aplicáveis:</p>
               <div className="mt-3 grid gap-2 sm:grid-cols-2">
                 {NIVEIS.map((n) => (
                   <label key={n.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-sm text-branco/90 transition hover:border-dourado/50">
@@ -290,7 +304,8 @@ export default function AulaGratuitaPage() {
             <div>
               <label className={labelCls}>04) O que você vê nesta imagem? *</label>
               <p className={hintCls}>Vá além da descrição. Fale sobre atmosfera, narrativa, símbolo, intenção. O que está acontecendo além do que é visível?</p>
-              <figure className="mt-4 overflow-hidden rounded-xl border border-borda">
+              {/* Sem legenda visível — de propósito (revelar o título entregaria a resposta). */}
+              <div className="mt-4 overflow-hidden rounded-xl border border-borda">
                 <Image
                   src={NIGHTHAWKS}
                   alt="Nighthawks, Edward Hopper, 1942"
@@ -299,10 +314,7 @@ export default function AulaGratuitaPage() {
                   sizes="(max-width: 768px) 100vw, 768px"
                   className="h-auto w-full"
                 />
-                <figcaption className="bg-escuro/80 px-4 py-2 text-center text-xs italic text-cinza">
-                  Nighthawks — Edward Hopper, 1942
-                </figcaption>
-              </figure>
+              </div>
               <textarea rows={4} {...register('resp_hopper')} className={`${inputCls} mt-3 resize-y`} />
               {errors.resp_hopper && <p className={errCls}>{errors.resp_hopper.message}</p>}
             </div>
