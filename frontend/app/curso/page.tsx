@@ -4,7 +4,7 @@ import Image from 'next/image'
 import { useState } from 'react'
 import {
   Camera, Eye, TrendingUp,
-  Clock, Calendar, MapPin, Users, Award, Sparkles,
+  Clock, Calendar, MapPin, Users, Award, Sparkles, Bell,
   CheckCircle2, XCircle, MessageCircle, ChevronDown,
 } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
@@ -51,12 +51,12 @@ const pilares = [
 ]
 
 const logistica: { Icon: typeof Clock; label: string; value: string }[] = [
-  { Icon: Clock,    label: 'Duração',     value: '6 meses' },
-  { Icon: Calendar, label: 'Encontros',   value: '2× por semana' },
-  { Icon: MapPin,   label: 'Formato',     value: 'Presencial · Sorocaba/SP' },
-  { Icon: Users,    label: 'Turmas',      value: 'Máx. 12 alunos' },
-  { Icon: Award,    label: 'Certificado', value: 'Incluso' },
-  { Icon: Sparkles, label: 'Material',    value: 'Apostila + e-book' },
+  { Icon: Clock,    label: 'Duração',       value: '1 semestre (6 meses)' },
+  { Icon: Calendar, label: 'Encontros',     value: '2× por semana · noite' },
+  { Icon: MapPin,   label: 'Formato',       value: 'Presencial · Sorocaba/SP' },
+  { Icon: Users,    label: 'Vagas/turma',   value: 'Padrão até 12 · VIP intimista' },
+  { Icon: Award,    label: 'Certificado',   value: 'Incluso' },
+  { Icon: Sparkles, label: 'Material',      value: 'Apostila + e-book' },
 ]
 
 // FAQ
@@ -65,10 +65,16 @@ const faq: { q: string; a: string }[] = [
     a: 'Não para começar. Recomendamos uma DSLR ou mirrorless para tirar o máximo do curso, mas a escola tem equipamento de estúdio e orientamos a melhor compra conforme seu objetivo e orçamento.' },
   { q: 'Atende quem nunca pegou uma câmera?',
     a: 'Sim — a Fase 1 (Fundação) começa do zero absoluto. A maior parte dos alunos chega assim e termina cobrando pelos próprios trabalhos.' },
+  { q: 'Quais dias da semana são as aulas?',
+    a: 'O dia é definido a cada semestre, na formação da turma, pelo professor — em conjunto com os alunos matriculados. Pode ser, por exemplo, terças e quintas em um semestre, e segundas e quartas no seguinte. Os encontros são sempre à noite, 2× por semana.' },
+  { q: 'Qual a diferença entre a turma Padrão e a turma VIP?',
+    a: 'A turma Padrão tem até 12 alunos e segue o cronograma da escola. A turma VIP é intimista, com poucos alunos — mais atenção individual, mais tempo de estúdio para cada um e flexibilidade maior no calendário. Mesmos 6 módulos e mesma certificação.' },
+  { q: 'Quando começa a próxima turma?',
+    a: 'As vagas abrem por semestre. Para receber o aviso assim que abrirem (e antes da divulgação geral), deixe seu nome em "Notifique-me" no card de turmas acima.' },
   { q: 'Quanto tempo dura?',
-    a: '6 meses, com encontros 2× por semana. Carga horária total e cronograma são entregues com a brochura.' },
+    a: 'Um semestre — 6 meses, com encontros 2× por semana. Carga horária total e cronograma são entregues com a brochura.' },
   { q: 'O curso tem certificado?',
-    a: 'Sim. Certificado de conclusão Tri Amici Photography Academy ao final dos 6 módulos.' },
+    a: 'Sim. Certificado de conclusão Tri Amici Photography Academy ao final dos 6 módulos, válido para as duas modalidades (Padrão e VIP).' },
   { q: 'Qual é o investimento?',
     a: 'Os valores são apresentados na conversa de matrícula — preferimos te explicar o que está incluso (aulas, estúdio, apostila, certificado, acesso à galeria) antes de falar de número. Chame no WhatsApp para saber.' },
   { q: 'Tem aula de teste antes de matricular?',
@@ -103,6 +109,34 @@ function FaqItem({ q, a }: { q: string; a: string }) {
 const WHATSAPP_LINK =
   'https://wa.me/5515981127508?text=' +
   encodeURIComponent('Olá! Vim pela página do curso e gostaria de saber o investimento e a próxima turma.')
+
+const WHATSAPP_NOTIFY =
+  'https://wa.me/5515981127508?text=' +
+  encodeURIComponent('Olá! Quero ser avisado(a) assim que abrir a próxima turma do curso.')
+
+// TODO: tornar o "Notifique-me" funcional — endpoint POST /api/notify-turma
+// criando lead tipo='NOTIFICAR_TURMA' na tabela `leads` (já existe).
+// Por ora o botão grande leva ao WhatsApp e o link discreto exibe um aviso.
+function NotifyButton() {
+  const [shown, setShown] = useState(false)
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => setShown(true)}
+        className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-dourado underline-offset-4 hover:underline"
+      >
+        <Bell size={14} /> Notifique-me quando abrir
+      </button>
+      {shown && (
+        <p className="mt-3 rounded-lg border border-dourado/30 bg-dourado/[0.07] px-4 py-3 text-xs leading-6 text-branco/85">
+          Em breve teremos um formulário aqui. Por enquanto, peça pelo WhatsApp —
+          a gente te avisa antes da divulgação geral.
+        </p>
+      )}
+    </>
+  )
+}
 
 export default function CursoPage() {
   return (
@@ -336,6 +370,148 @@ export default function CursoPage() {
         </div>
       </section>
 
+      {/* ── MODALIDADES (Padrão x VIP) ────────────────────── */}
+      <section className="bg-preto py-24">
+        <div className="container-page">
+          <ScrollReveal>
+            <p className="section-kicker">Modalidades</p>
+            <h2 className="mt-4 max-w-2xl font-serif text-4xl md:text-5xl">
+              Duas formas de viver o curso.
+            </h2>
+            <p className="mt-5 max-w-xl text-base leading-8 text-cinza">
+              Mesmo programa, mesma certificação. Você escolhe o ritmo e o nível de proximidade
+              com o professor.
+            </p>
+          </ScrollReveal>
+
+          <div className="mt-12 grid gap-5 md:grid-cols-2">
+            {/* PADRÃO */}
+            <ScrollReveal delay={0.05}>
+              <div className="lift-card flex h-full flex-col border border-borda bg-escuro/60 p-7 md:p-9">
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-dourado/80">
+                  Turma Padrão
+                </p>
+                <h3 className="mt-4 font-serif text-3xl leading-snug text-branco md:text-4xl">
+                  O programa completo,<br />em grupo.
+                </h3>
+                <p className="mt-5 text-sm leading-7 text-cinza">
+                  A experiência clássica da escola: turma cheia, troca entre colegas e o ritmo
+                  consagrado em 25 anos de método.
+                </p>
+
+                <ul className="mt-7 space-y-3 text-sm leading-6 text-branco/85">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Até <strong>12 alunos</strong> por turma</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Encontros 2× por semana, à noite</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Cronograma e dias da semana definidos na formação da turma</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Troca rica entre colegas e dinâmica de grupo</span>
+                  </li>
+                </ul>
+
+                <div className="mt-auto pt-8">
+                  <Button href="/aula-gratuita">Quero a Turma Padrão</Button>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* VIP */}
+            <ScrollReveal delay={0.12}>
+              <div className="lift-card relative flex h-full flex-col overflow-hidden border border-dourado/40 bg-gradient-to-br from-dourado/[0.10] via-escuro/70 to-preto p-7 md:p-9">
+                {/* Selo */}
+                <span className="absolute right-5 top-5 rounded-full border border-dourado/50 bg-preto/70 px-3 py-1 text-[0.62rem] font-semibold uppercase tracking-[0.22em] text-dourado">
+                  Intimista
+                </span>
+
+                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-dourado">
+                  Turma VIP
+                </p>
+                <h3 className="mt-4 font-serif text-3xl leading-snug text-branco md:text-4xl">
+                  Ateliê privado,<br />atenção redobrada.
+                </h3>
+                <p className="mt-5 text-sm leading-7 text-cinza">
+                  Para quem prefere um ambiente mais reservado — mais tempo de estúdio por
+                  aluno, mais profundidade nos exercícios e maior flexibilidade de calendário.
+                </p>
+
+                <ul className="mt-7 space-y-3 text-sm leading-6 text-branco/90">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span><strong>Poucos alunos</strong> — turma intimista</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Mais atenção individual do professor</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Mais tempo de estúdio e prática para cada aluno</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-dourado" />
+                    <span>Mesmo programa, mesmo certificado</span>
+                  </li>
+                </ul>
+
+                <div className="mt-auto pt-8">
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn btn-primary"
+                  >
+                    <span className="relative z-[1] flex items-center gap-2">
+                      <MessageCircle size={16} />
+                      Saber mais (VIP)
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* Próxima turma + Notifique-me */}
+          <ScrollReveal delay={0.2}>
+            <div className="mt-10 flex flex-col items-start justify-between gap-5 rounded-2xl border border-borda bg-escuro/40 p-6 md:flex-row md:items-center md:p-7">
+              <div>
+                <p className="text-xs uppercase tracking-[0.22em] text-dourado/80">Próxima turma</p>
+                <p className="mt-2 font-serif text-xl text-branco md:text-2xl">
+                  Inscrições por semestre — calendário a confirmar.
+                </p>
+                <p className="mt-1 text-sm text-cinza">
+                  Dias da semana definidos na formação da turma.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href={WHATSAPP_NOTIFY}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="btn btn-outline"
+                >
+                  <span className="relative z-[1] flex items-center gap-2">
+                    <Bell size={15} />
+                    Avise-me pela próxima turma
+                  </span>
+                </a>
+              </div>
+            </div>
+            <div className="mt-3 pl-1">
+              <NotifyButton />
+            </div>
+          </ScrollReveal>
+        </div>
+      </section>
+
       {/* ── INFO RÁPIDA + INVESTIMENTO ────────────────────── */}
       <section className="bg-[#0c0c0c] py-24">
         <div className="container-page">
@@ -357,8 +533,9 @@ export default function CursoPage() {
                     </li>
                   ))}
                 </ul>
-                <p className="mt-4 text-xs text-cinza/65">
-                  Horários e próxima turma — a confirmar com a secretaria da escola.
+                <p className="mt-4 text-xs leading-6 text-cinza/65">
+                  Os dias da semana são definidos a cada semestre na formação da turma, em
+                  conjunto com os alunos matriculados. Encontros sempre à noite.
                 </p>
               </div>
             </ScrollReveal>
