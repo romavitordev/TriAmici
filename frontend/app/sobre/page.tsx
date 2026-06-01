@@ -46,12 +46,14 @@ export default function SobrePage() {
         {/* ── HERO ─────────────────────────────────────────── */}
         <ScrollReveal>
           <p className="section-kicker">Sobre a escola</p>
-          <h1 className="mt-4 max-w-4xl font-serif text-4xl leading-[1.08] md:text-5xl lg:text-7xl">
-            Três amigos, uma paixão por imagem<br className="hidden md:block" /> e 25 anos de oficio.
+          <h1 className="mt-5 max-w-[22ch] text-balance font-serif text-[clamp(2.25rem,6vw,5.25rem)] leading-[1.05] tracking-[-0.01em] text-branco">
+            Três amigos, uma paixão por imagem<br className="hidden lg:block" />
+            <span className="italic text-dourado/95"> e 25 anos de ofício.</span>
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-9 text-branco/80">
-            Tri Amici. Em italiano: <em className="text-dourado">três amigos</em>. É daí que vem o nome
-            da escola — e tudo o que a gente faz em Sorocaba desde o ano 2000.
+          <p className="mt-8 max-w-xl text-balance text-lg leading-[1.7] text-branco/75 md:text-xl">
+            <span className="font-serif italic text-dourado">Tri Amici</span> — em italiano,
+            <span className="text-branco/95"> três amigos</span>. É daí que vem o nome da escola — e
+            tudo o que a gente faz em Sorocaba desde o ano 2000.
           </p>
         </ScrollReveal>
 
