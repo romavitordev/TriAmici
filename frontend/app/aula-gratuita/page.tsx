@@ -1,6 +1,7 @@
 'use client'
 
 import Image from 'next/image'
+import { ChevronDown } from 'lucide-react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -166,25 +167,30 @@ export default function AulaGratuitaPage() {
             </div>
 
             {/* Idade */}
-            <fieldset>
-              <legend className={labelCls}>Idade *</legend>
+            <div>
+              <label className={labelCls}>Idade *</label>
               <p className={hintCls}>(A idade mínima para o curso é de 18 anos.)</p>
-              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
-                {FAIXAS.map((f) => {
-                  const full = f.value === '99+'
-                  return (
-                    <label
-                      key={f.value}
-                      className={`flex cursor-pointer items-center gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-[0.95rem] text-branco/90 transition hover:border-dourado/50 ${full ? 'col-span-2 items-start sm:col-span-3' : ''}`}
-                    >
-                      <input type="radio" value={f.value} {...register('faixa_idade')} className="mt-0.5 shrink-0 accent-dourado" />
-                      <span>{f.label}</span>
-                    </label>
-                  )
-                })}
+              <div className="relative mt-2">
+                <select
+                  {...register('faixa_idade')}
+                  defaultValue=""
+                  className={`${inputCls} cursor-pointer appearance-none pr-11`}
+                >
+                  <option value="" disabled>Selecione sua faixa de idade</option>
+                  {FAIXAS.map((f) => (
+                    <option key={f.value} value={f.value} className="bg-escuro text-branco">
+                      {f.label}
+                    </option>
+                  ))}
+                </select>
+                <ChevronDown
+                  size={18}
+                  aria-hidden
+                  className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-dourado"
+                />
               </div>
               {errors.faixa_idade && <p className={errCls}>{errors.faixa_idade.message}</p>}
-            </fieldset>
+            </div>
 
             {/* E-mail */}
             <div>
@@ -276,10 +282,10 @@ export default function AulaGratuitaPage() {
           {/* ───────── SEPARADOR ───────── */}
           <div className="border-t border-dourado/25 pt-12 text-center">
             <p className="section-kicker">Etapa 2</p>
-            <h2 className="mt-3 font-serif text-3xl italic text-dourado md:text-4xl">
+            <h2 className="mx-auto mt-3 max-w-2xl text-balance font-serif text-3xl italic leading-tight text-dourado md:text-4xl">
               O Singelo (e Revelador) “Vestibular” da Nossa Escola
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm leading-7 text-cinza">
+            <p className="mx-auto mt-5 max-w-md text-balance text-[0.95rem] leading-relaxed text-branco/65">
               Quatro perguntas. Nenhuma resposta certa. Queremos conhecer o seu olhar — não te avaliar.
             </p>
           </div>
