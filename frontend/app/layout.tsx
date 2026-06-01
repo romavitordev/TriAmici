@@ -5,12 +5,7 @@ import Script from 'next/script'
 
 import { Cormorant_Garamond, DM_Sans, Playfair_Display } from 'next/font/google'
 
-import { Footer } from '@/components/layout/Footer'
-import { Header } from '@/components/layout/Header'
-import { CustomCursor } from '@/components/layout/CustomCursor'
-import { LenisProvider } from '@/components/layout/LenisProvider'
-import { PageTransition } from '@/components/layout/PageTransition'
-import { AudioPlayer } from '@/components/ui/AudioPlayer'
+import { SiteChrome } from '@/components/layout/SiteChrome'
 
 
 
@@ -71,17 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         }
       `}</Script>
       <body className="font-sans cursor-none">
-
-        <LenisProvider />
-
-        <CustomCursor />
-        <Header />
-        <PageTransition>
-          <main className="overflow-x-hidden">{children}</main>
-        </PageTransition>
-        <Footer />
-        <AudioPlayer />
-        {/* MobileBottomNav é renderizado dentro de <Header /> */}
+        {/* SiteChrome decide o que renderizar: site completo (Header/Footer/
+            AudioPlayer/cursor custom) ou, em /admin, apenas o conteúdo. */}
+        <SiteChrome>{children}</SiteChrome>
       </body>
     </html>
   )

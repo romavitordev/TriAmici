@@ -181,7 +181,7 @@ export function Hero() {
         </p>
 
         <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4 md:mt-12">
-          <Button href="/contato">Quero a aula gratuita</Button>
+          <Button href="/aula-gratuita">Quero a aula gratuita</Button>
           <Button href="/sobre" variant="outline">Conheça a escola</Button>
         </div>
       </div>

@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser'
 import express from 'express'
 import morgan from 'morgan'
 import { config } from './config/index.js'
@@ -8,6 +9,7 @@ import routes from './routes/index.js'
 const app = express()
 
 app.use(express.json({ limit: '1mb' }))
+app.use(cookieParser())
 app.use(morgan(config.env === 'production' ? 'combined' : 'dev'))
 app.use(corsMiddleware)
 app.use('/api', routes)

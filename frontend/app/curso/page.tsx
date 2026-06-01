@@ -268,7 +268,7 @@ export default function CursoPage() {
               Sem compromisso. Traga sua câmera ou venha só com curiosidade.
             </p>
             <div className="mt-9">
-              <Button href="/contato">Peça seu convite agora</Button>
+              <Button href="/aula-gratuita">Peça seu convite agora</Button>
             </div>
           </ScrollReveal>
         </div>
