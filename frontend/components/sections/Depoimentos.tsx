@@ -60,6 +60,41 @@ const fallback: Depoimento[] = [
     texto: 'A escola é um ambiente de transformação. Saí pronta para trabalhar com fotografia profissionalmente.',
     foto: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=600&q=80',
   },
+  {
+    id: '8',
+    nome: 'Pedro Almeida',
+    turma: 'Turma VIP 2024',
+    texto: 'Escolhi a VIP por causa do tempo de estúdio individual — fez toda a diferença. Em seis meses, eu tinha um portfólio que abriu portas reais.',
+    foto: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    id: '9',
+    nome: 'Camila Tavares',
+    turma: 'Turma 2024',
+    texto: 'Cheguei achando que precisava de uma câmera cara. Saí entendendo que precisava de olhar — e a câmera ficou simples no caminho.',
+    foto: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    id: '10',
+    nome: 'Roberto Salles',
+    turma: 'Turma 2022',
+    texto: 'Faço fotografia como hobby sério há anos, e a Tri Amici me deu a base técnica que faltava. Hoje fotografo viagens com intenção real.',
+    foto: 'https://images.unsplash.com/photo-1463453091185-61582044d556?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    id: '11',
+    nome: 'Letícia Vasconcellos',
+    turma: 'Turma 2025',
+    texto: 'O método é prático desde a primeira semana. Em vez de teoria infinita, a gente fotografa, recebe direção e refaz — e o olhar muda rápido.',
+    foto: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?auto=format&fit=crop&w=600&q=80',
+  },
+  {
+    id: '12',
+    nome: 'André Tobias',
+    turma: 'Turma 2023',
+    texto: 'Comecei fotografando minha família e terminei fazendo book de casamento. A parte de mercado e precificação foi o que mais me surpreendeu.',
+    foto: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?auto=format&fit=crop&w=600&q=80',
+  },
 ]
 
 export function Depoimentos() {
