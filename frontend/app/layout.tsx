@@ -1,7 +1,6 @@
 import './globals.css'
 
 import type { Metadata } from 'next'
-import Script from 'next/script'
 
 import { Cormorant_Garamond, DM_Sans, Playfair_Display } from 'next/font/google'
 
@@ -53,19 +52,18 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${playfair.variable} ${dmSans.variable} ${cormorant.variable}`}>
-      {/*
-        beforeInteractive = executa síncrono no <head> durante o parsing HTML,
-        antes que qualquer scroll restoration do browser aconteça.
-        history.scrollRestoration = 'manual' impede o browser de restaurar
-        scroll position em refresh/reopen, garantindo que a Hero sempre
-        comece no frame 0.
-      */}
-      <Script id="disable-scroll-restore" strategy="beforeInteractive">{`
-        if ('scrollRestoration' in history) {
-          history.scrollRestoration = 'manual';
-        }
-      `}</Script>
       <body className="font-sans cursor-none">
+        {/*
+          scrollRestoration = 'manual' impede o browser de restaurar a posição
+          de scroll em refresh/reopen, garantindo que a Hero comece no frame 0.
+          Inline no início do <body> — um <script> não pode ser filho direto de
+          <html> (causava erro de hydration).
+        */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: "if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }",
+          }}
+        />
         {/* SiteChrome decide o que renderizar: site completo (Header/Footer/
             AudioPlayer/cursor custom) ou, em /admin, apenas o conteúdo. */}
         <SiteChrome>{children}</SiteChrome>
