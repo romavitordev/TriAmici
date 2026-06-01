@@ -48,10 +48,10 @@ const NIGHTHAWKS =
   'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/Nighthawks_by_Edward_Hopper_1942.jpg/1280px-Nighthawks_by_Edward_Hopper_1942.jpg'
 
 const inputCls =
-  'w-full rounded-lg border border-borda bg-escuro/60 px-4 py-3 text-branco outline-none transition placeholder:text-cinza/50 focus:border-dourado'
-const labelCls = 'block text-sm font-medium text-branco'
-const hintCls = 'mt-1 text-xs leading-5 text-cinza'
-const errCls = 'mt-1 text-xs text-red-400'
+  'w-full rounded-lg border border-borda bg-escuro/60 px-4 py-3 text-base text-branco outline-none transition placeholder:text-cinza/50 focus:border-dourado'
+const labelCls = 'block text-[0.98rem] font-medium text-branco'
+const hintCls = 'mt-1 text-[0.85rem] leading-relaxed text-branco/55'
+const errCls = 'mt-1 text-[0.82rem] text-red-400'
 
 export default function AulaGratuitaPage() {
   const [sent, setSent] = useState(false)
@@ -169,13 +169,19 @@ export default function AulaGratuitaPage() {
             <fieldset>
               <legend className={labelCls}>Idade *</legend>
               <p className={hintCls}>(A idade mínima para o curso é de 18 anos.)</p>
-              <div className="mt-3 grid gap-2 sm:grid-cols-2">
-                {FAIXAS.map((f) => (
-                  <label key={f.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-sm text-branco/90 transition hover:border-dourado/50">
-                    <input type="radio" value={f.value} {...register('faixa_idade')} className="mt-0.5 accent-dourado" />
-                    <span>{f.label}</span>
-                  </label>
-                ))}
+              <div className="mt-3 grid grid-cols-2 gap-2 sm:grid-cols-3">
+                {FAIXAS.map((f) => {
+                  const full = f.value === '99+'
+                  return (
+                    <label
+                      key={f.value}
+                      className={`flex cursor-pointer items-center gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-[0.95rem] text-branco/90 transition hover:border-dourado/50 ${full ? 'col-span-2 items-start sm:col-span-3' : ''}`}
+                    >
+                      <input type="radio" value={f.value} {...register('faixa_idade')} className="mt-0.5 shrink-0 accent-dourado" />
+                      <span>{f.label}</span>
+                    </label>
+                  )
+                })}
               </div>
               {errors.faixa_idade && <p className={errCls}>{errors.faixa_idade.message}</p>}
             </fieldset>
@@ -231,7 +237,7 @@ export default function AulaGratuitaPage() {
               <legend className={labelCls}>Quero aprender fotografia profissional para: *</legend>
               <div className="mt-3 space-y-2">
                 {OBJETIVOS.map((o) => (
-                  <label key={o.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-sm text-branco/90 transition hover:border-dourado/50">
+                  <label key={o.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-[0.95rem] text-branco/90 transition hover:border-dourado/50">
                     <input type="radio" value={o.value} {...register('objetivo')} className="mt-0.5 accent-dourado" />
                     <span>{o.label}</span>
                   </label>
@@ -250,7 +256,7 @@ export default function AulaGratuitaPage() {
               <p className="mt-1 text-xs text-cinza">Clique em todas que julgar aplicáveis:</p>
               <div className="mt-3 grid gap-2 sm:grid-cols-2">
                 {NIVEIS.map((n) => (
-                  <label key={n.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-sm text-branco/90 transition hover:border-dourado/50">
+                  <label key={n.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-[0.95rem] text-branco/90 transition hover:border-dourado/50">
                     <input type="checkbox" value={n.value} {...register('nivel')} className="mt-0.5 accent-dourado" />
                     <span>{n.label}</span>
                   </label>
@@ -333,7 +339,7 @@ export default function AulaGratuitaPage() {
               <legend className={labelCls}>Eu quero (marque quantas forem necessárias) *</legend>
               <div className="mt-3 space-y-2">
                 {INTENCOES.map((i) => (
-                  <label key={i.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-sm text-branco/90 transition hover:border-dourado/50">
+                  <label key={i.value} className="flex cursor-pointer items-start gap-3 rounded-lg border border-borda bg-escuro/40 px-4 py-3 text-[0.95rem] text-branco/90 transition hover:border-dourado/50">
                     <input type="checkbox" value={i.value} {...register('intencoes')} className="mt-0.5 accent-dourado" />
                     <span>{i.label}</span>
                   </label>

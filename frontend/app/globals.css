@@ -45,9 +45,13 @@ a {
   text-decoration: none;
 }
 
-button,
-a {
-  cursor: none;
+/* Cursor customizado: esconde o cursor nativo SOMENTE quando ativo
+   (body.cursor-none nas páginas do site). Em /admin o body não tem essa
+   classe, então o cursor nativo volta ao normal (botões, links etc.).
+   O seletor com * cobre inputs/textarea — evita cursor duplicado no form. */
+.cursor-none,
+.cursor-none * {
+  cursor: none !important;
 }
 
 
