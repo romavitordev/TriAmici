@@ -110,8 +110,8 @@ export default function ContatoPage() {
           <div className="mt-12 overflow-hidden rounded-2xl border border-dourado/35 bg-gradient-to-r from-dourado/[0.12] via-dourado/[0.06] to-transparent p-7 md:flex md:items-center md:justify-between md:gap-6 md:p-9">
             <div className="max-w-2xl">
               <p className="section-kicker">Aula experimental</p>
-              <h2 className="mt-3 font-serif text-2xl leading-snug text-white md:text-3xl">
-                Já quer começar? Garanta seu convite para a Aula Zero.
+              <h2 className="mt-3 max-w-[22ch] text-balance font-serif text-2xl leading-[1.15] text-white md:text-3xl">
+                Já quer começar? <span className="italic text-dourado/95">Garanta seu convite para a Aula Zero.</span>
               </h2>
               <p className="mt-3 text-sm leading-7 text-cinza md:text-base">
                 Pré-inscrição rápida — sem compromisso financeiro, com vestibular de sensibilidade
